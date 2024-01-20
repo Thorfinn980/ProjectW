@@ -12,4 +12,4 @@ func exit():
 	print("You exited attacking")
 	
 func state_physics_process (delta: float):
-	
+	pass
