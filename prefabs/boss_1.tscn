@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://7o8udtcij767"]
+
+[ext_resource type="Texture2D" uid="uid://c25jxpkhna8wy" path="res://icon.svg" id="1_jdy2x"]
+[ext_resource type="Script" path="res://scripts/state machines/State MachineV2.gd" id="1_jivpa"]
+[ext_resource type="Script" path="res://scripts/boss 1/boss_1.gd" id="1_n3m66"]
+[ext_resource type="Script" path="res://scripts/boss 1/Boss1_idle.gd" id="3_ljcho"]
+[ext_resource type="Script" path="res://scripts/boss 1/Boss1_chasing.gd" id="5_346vh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73iqa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jdy2x")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gtse"]
+size = Vector2(55, 55)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hpbfb"]
+radius = 156.541
+
+[node name="Boss1" type="CharacterBody2D"]
+position = Vector2(-25, -25)
+script = ExtResource("1_n3m66")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(36.5, 36.5)
+scale = Vector2(0.429688, 0.429688)
+sprite_frames = SubResource("SpriteFrames_73iqa")
+animation = &"Idle"
+frame_progress = 0.669773
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(36.5, 36.5)
+shape = SubResource("RectangleShape2D_3gtse")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+position = Vector2(25, 25)
+shape = SubResource("CircleShape2D_hpbfb")
+debug_color = Color(0.788235, 0.407843, 0.4, 0.419608)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_jivpa")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
+script = ExtResource("3_ljcho")
+boss = NodePath("../..")
+
+[node name="Air" type="Node" parent="StateMachine"]
+
+[node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
+script = ExtResource("5_346vh")
+boss = NodePath("../..")
+
+[connection signal="body_entered" from="DetectionZone" to="StateMachine/Idle" method="_on_detection_zone_body_entered"]

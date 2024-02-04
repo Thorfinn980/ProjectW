@@ -26,3 +26,7 @@ func state_process(_delta: float):
 # similar to _physics_process but for states, render physics except for everything.
 func state_physics_process (_delta: float):
 	pass
+
+
+func _on_detection_zone_body_exited(body):
+	pass # Replace with function body.

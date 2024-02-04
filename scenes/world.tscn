@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq258l1e6pjyr"]
+[gd_scene load_steps=4 format=3 uid="uid://cq258l1e6pjyr"]
 
 [ext_resource type="PackedScene" uid="uid://bo1aalxmfx57p" path="res://prefabs/PlayerV2.tscn" id="2_e1b8k"]
+[ext_resource type="PackedScene" uid="uid://7o8udtcij767" path="res://prefabs/boss_1.tscn" id="2_pa2e7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvk8t"]
 size = Vector2(1371, 269)
 
 [node name="World" type="Node2D"]
 
-[node name="PlayerV2" parent="." instance=ExtResource("2_e1b8k")]
+[node name="PlayerV2" parent="." groups=["Players"] instance=ExtResource("2_e1b8k")]
 position = Vector2(222.989, 112.989)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -22,3 +23,6 @@ offset_left = -52.0
 offset_top = 446.0
 offset_right = 1327.0
 offset_bottom = 718.0
+
+[node name="Boss1" parent="." groups=["Enemies"] instance=ExtResource("2_pa2e7")]
+position = Vector2(582, 361)
