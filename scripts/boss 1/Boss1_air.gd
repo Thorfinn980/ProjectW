@@ -22,6 +22,8 @@ func state_process(_delta: float):
 
 # similar to _physics_process but for states, render physics except for everything.
 func state_physics_process (_delta: float):
-	if boss.is_on_floor():
+	if boss.is_on_floor() && boss.isChasing:
+		Transitioned.emit(self, "Chasing")
+	elif boss.is_on_floor() && not boss.isChasing:
 		Transitioned.emit(self, "Idle")
 	pass

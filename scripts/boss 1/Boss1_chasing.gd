@@ -1,18 +1,15 @@
 extends StateV2
 @export var boss : CharacterBody2D
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	
-	pass # Replace with function body.
+var canAttack1 = true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-# Abstract func: upon entering, execute code within
 func enter():
 	print("Boss1 is chasing")
+
+func exit():
+	print("Boss1 exiting chasing")
+
+func state_physics_process (_delta: float):
 	var player = boss.player_ref
 	var direction = (player.position - boss.position).normalized()
 	
@@ -20,26 +17,21 @@ func enter():
 	# else left, move left
 	if(direction.x > 0):
 		boss.velocity.x = direction.x * boss.SPEED
-		print(boss.velocity.x)
 	else:
 		boss.velocity.x = direction.x * boss.SPEED
-		print(boss.velocity.x)
-	pass
+		
+	var distance = abs(player.position.x - boss.position.x)
+	#print("Distance: " + str(distance))
+	if(distance < 100.0) && (canAttack1 == true):
+		canAttack1 = false
+		Transitioned.emit(self, "Attack1")
+		
 
-# Abstract func: upon exiting, execute code within
-func exit():
-	print("Boss1 exiting chasing")
-	pass
+
+func _on_cooldown_timeout():
+	canAttack1 = true
+	pass # Replace with function body.
 
 func _on_detection_zone_body_exited(body):
+	boss.isChasing = false
 	Transitioned.emit(self, "Idle")
-
-# similar to _process but for states, render everything except for physics.
-func state_process(_delta: float):
-	pass
-
-# similar to _physics_process but for states, render physics except for everything.
-func state_physics_process (_delta: float):
-	pass
-
-

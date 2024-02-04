@@ -30,4 +30,5 @@ func state_physics_process (_delta: float):
 func _on_detection_zone_body_entered(body):
 	#TODO playerV2 name will probably be changed.
 	if(body.name == "PlayerV2"):
+		boss.isChasing = true
 		Transitioned.emit(self, "Chasing")
