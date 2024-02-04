@@ -25,4 +25,4 @@ offset_right = 1327.0
 offset_bottom = 718.0
 
 [node name="Boss1" parent="." groups=["Enemies"] instance=ExtResource("2_pa2e7")]
-position = Vector2(582, 361)
+position = Vector2(400, -8)

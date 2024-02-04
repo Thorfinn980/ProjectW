@@ -8,12 +8,12 @@ func _ready():
 	
 # Abstract func: upon entering, execute code within
 func enter():
-	print("Boss1 is idling")
+	print("Boss1 is in air")
 	pass
 
 # Abstract func: upon enxiting, execute code within
 func exit():
-	print("Boss1 exiting idling")
+	print("Boss1 exiting air")
 	pass
 
 # similar to _process but for states, render everything except for physics.
@@ -22,12 +22,6 @@ func state_process(_delta: float):
 
 # similar to _physics_process but for states, render physics except for everything.
 func state_physics_process (_delta: float):
-	if not boss.is_on_floor():
-		Transitioned.emit(self, "Air")
+	if boss.is_on_floor():
+		Transitioned.emit(self, "Idle")
 	pass
-
-
-func _on_detection_zone_body_entered(body):
-	#TODO playerV2 name will probably be changed.
-	if(body.name == "PlayerV2"):
-		Transitioned.emit(self, "Chasing")

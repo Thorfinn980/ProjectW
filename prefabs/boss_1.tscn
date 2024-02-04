@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://7o8udtcij767"]
+[gd_scene load_steps=11 format=3 uid="uid://7o8udtcij767"]
 
 [ext_resource type="Texture2D" uid="uid://c25jxpkhna8wy" path="res://icon.svg" id="1_jdy2x"]
 [ext_resource type="Script" path="res://scripts/state machines/State MachineV2.gd" id="1_jivpa"]
 [ext_resource type="Script" path="res://scripts/boss 1/boss_1.gd" id="1_n3m66"]
 [ext_resource type="Script" path="res://scripts/boss 1/Boss1_idle.gd" id="3_ljcho"]
+[ext_resource type="Script" path="res://scripts/boss 1/Boss1_air.gd" id="5_45wj4"]
 [ext_resource type="Script" path="res://scripts/boss 1/Boss1_chasing.gd" id="5_346vh"]
+[ext_resource type="Script" path="res://scripts/boss 1/Boss1_Jump.gd" id="7_ct6qu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_73iqa"]
 animations = [{
@@ -53,10 +55,17 @@ initial_state = NodePath("Idle")
 script = ExtResource("3_ljcho")
 boss = NodePath("../..")
 
-[node name="Air" type="Node" parent="StateMachine"]
+[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
+script = ExtResource("5_45wj4")
+boss = NodePath("../..")
 
 [node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
 script = ExtResource("5_346vh")
 boss = NodePath("../..")
 
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
+script = ExtResource("7_ct6qu")
+boss = NodePath("../..")
+
 [connection signal="body_entered" from="DetectionZone" to="StateMachine/Idle" method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="StateMachine/Chasing" method="_on_detection_zone_body_exited"]
