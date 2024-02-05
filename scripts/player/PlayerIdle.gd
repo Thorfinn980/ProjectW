@@ -10,7 +10,10 @@ func exit():
 	print("You exited idling")
 	
 
-func _process(delta):
+func state_process(delta):
+	if Input.is_action_just_pressed("Attack"):
+		Transitioned.emit(self,"InitialAttack")
+	
 	# If you have platforms that break when standing on them, you need that check for 
 	# the character to fall.
 	if not owner.is_on_floor():
@@ -24,10 +27,7 @@ func _process(delta):
 
 
 func state_physics_process (delta: float):
-	
-	var direction = Input.get_axis("Left", "Right")
-	
-	if direction:
+	if player.direction:
 		if player.velocity.y == 0:
 			Transitioned.emit(self, "Run")
 	else:

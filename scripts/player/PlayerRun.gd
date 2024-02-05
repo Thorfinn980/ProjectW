@@ -5,16 +5,19 @@ class_name PlayerRun
 
 func enter():
 	print("You are running")
+	
+func state_process (delta: float):
+	if Input.is_action_just_pressed("Attack"):
+		Transitioned.emit(self,"InitialAttack")
 
 func state_physics_process (delta: float):
-	var direction = Input.get_axis("Left", "Right")
 	
 	if not player.is_on_floor():
 		Transitioned.emit(self,"Air")
 		return
 	
-	if direction:
-		player.velocity.x = direction * player.SPEED
+	if player.direction:
+		player.velocity.x = player.direction * player.SPEED
 		if player.velocity.y == 0:
 			player.anim.play("Run")
 	else:
@@ -24,7 +27,7 @@ func state_physics_process (delta: float):
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		Transitioned.emit(self,"Air")
-	elif direction == 0:
+	elif player.direction == 0:
 		Transitioned.emit(self,"Idle")
 	
 	player.move_and_slide()

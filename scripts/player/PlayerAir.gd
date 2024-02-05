@@ -14,14 +14,11 @@ func exit():
 	print("You exited jumping")
 	
 func state_physics_process (delta: float):
-	
-	var direction = Input.get_axis("Left", "Right")
-	
 	if player.velocity.y > 0:
 		player.anim.play("Fall")
 	
 	# Account for player horizontal and vertical in AIR STATE
-	player.velocity.x = direction * player.SPEED
+	player.velocity.x = player.direction * player.SPEED
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()
 	

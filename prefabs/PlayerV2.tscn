@@ -1,15 +1,19 @@
-[gd_scene load_steps=54 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=58 format=3 uid="uid://bo1aalxmfx57p"]
 
-[ext_resource type="Script" path="res://PlayerV2.gd" id="1_u8k0r"]
+[ext_resource type="Script" path="res://scripts/player/PlayerV2.gd" id="1_u8k0r"]
 [ext_resource type="Texture2D" uid="uid://cd4wqv6wfk8si" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Continuous Attack/player katana continuous attack 80x64.png" id="2_ecmwe"]
+[ext_resource type="Script" path="res://scripts/Stats.gd" id="2_vljkt"]
 [ext_resource type="Texture2D" uid="uid://b5gixtkxcp32t" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Attack-Sheathe/player katana attack-sheathe 80x64.png" id="3_3p0xq"]
 [ext_resource type="Texture2D" uid="uid://dvxv1w66tkme5" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V1/Player Jump/player jump 48x48.png" id="4_3ump4"]
 [ext_resource type="Texture2D" uid="uid://1cx3xglo61o4" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Run/player katana run 48x48.png" id="5_o5sgj"]
 [ext_resource type="Script" path="res://scripts/state machines/State MachineV2.gd" id="6_tb80v"]
-[ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAir.gd" id="7_dv8so"]
-[ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerIdle.gd" id="7_m5p01"]
-[ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerRun.gd" id="8_pufau"]
-[ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAttack.gd" id="10_6ne4l"]
+[ext_resource type="Script" path="res://scripts/player/PlayerAir.gd" id="7_dv8so"]
+[ext_resource type="Script" path="res://scripts/player/PlayerIdle.gd" id="7_m5p01"]
+[ext_resource type="Script" path="res://scripts/player/PlayerRun.gd" id="8_pufau"]
+[ext_resource type="Script" path="res://scripts/player/combat/InitialAttack.gd" id="11_pwhpa"]
+[ext_resource type="Script" path="res://scripts/player/PlayerHurt.gd" id="12_nnthj"]
+[ext_resource type="Script" path="res://scripts/player/combat/ComboAttack.gd" id="13_p5qla"]
+[ext_resource type="Script" path="res://scripts/player/combat/FinisherAttack.gd" id="14_il3iv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 5.0
@@ -291,6 +295,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_vjof7"]
 resource_name = "Attack2"
 length = 0.5015
+step = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -318,6 +323,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_o0vds"]
 resource_name = "Attack3"
+step = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -488,6 +494,12 @@ _data = {
 [node name="PlayerV2" type="CharacterBody2D"]
 script = ExtResource("1_u8k0r")
 
+[node name="ComboTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("2_vljkt")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_vvj3k")
@@ -528,5 +540,16 @@ player = NodePath("../..")
 script = ExtResource("8_pufau")
 player = NodePath("../..")
 
-[node name="Attack" type="Node" parent="State MachineV2"]
-script = ExtResource("10_6ne4l")
+[node name="Hurt" type="Node" parent="State MachineV2"]
+script = ExtResource("12_nnthj")
+
+[node name="InitialAttack" type="Node" parent="State MachineV2" node_paths=PackedStringArray("player")]
+script = ExtResource("11_pwhpa")
+player = NodePath("../..")
+
+[node name="ComboAttack" type="Node" parent="State MachineV2" node_paths=PackedStringArray("player")]
+script = ExtResource("13_p5qla")
+player = NodePath("../..")
+
+[node name="FinisherAttack" type="Node" parent="State MachineV2"]
+script = ExtResource("14_il3iv")
