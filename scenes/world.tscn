@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq258l1e6pjyr"]
+[gd_scene load_steps=5 format=3 uid="uid://cq258l1e6pjyr"]
 
+[ext_resource type="PackedScene" uid="uid://cg222c18upehq" path="res://prefabs/Enemies/EnemyTest1/enemy.tscn" id="2_6oom1"]
 [ext_resource type="PackedScene" uid="uid://bo1aalxmfx57p" path="res://prefabs/PlayerV2.tscn" id="2_e1b8k"]
+[ext_resource type="PackedScene" uid="uid://c1ailbn0xsupc" path="res://UI/health_changed_manager.tscn" id="3_sk452"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvk8t"]
 size = Vector2(1371, 269)
@@ -8,7 +10,7 @@ size = Vector2(1371, 269)
 [node name="World" type="Node2D"]
 
 [node name="PlayerV2" parent="." instance=ExtResource("2_e1b8k")]
-position = Vector2(222.989, 112.989)
+position = Vector2(219, 348)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-49, 456)
@@ -22,3 +24,12 @@ offset_left = -52.0
 offset_top = 446.0
 offset_right = 1327.0
 offset_bottom = 718.0
+
+[node name="Enemy" parent="." instance=ExtResource("2_6oom1")]
+position = Vector2(494, 385)
+
+[node name="HealthChangedManager" parent="." instance=ExtResource("3_sk452")]
+offset_left = 533.0
+offset_top = 370.0
+offset_right = 573.0
+offset_bottom = 410.0

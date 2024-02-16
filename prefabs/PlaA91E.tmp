@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=54 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://PlayerV2.gd" id="1_u8k0r"]
 [ext_resource type="Texture2D" uid="uid://cd4wqv6wfk8si" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Continuous Attack/player katana continuous attack 80x64.png" id="2_ecmwe"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dvxv1w66tkme5" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V1/Player Jump/player jump 48x48.png" id="4_3ump4"]
 [ext_resource type="Texture2D" uid="uid://1cx3xglo61o4" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Run/player katana run 48x48.png" id="5_o5sgj"]
 [ext_resource type="Script" path="res://scripts/state machines/State MachineV2.gd" id="6_tb80v"]
-[ext_resource type="Script" path="res://prefabs/Sword.gd" id="6_y8cpl"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAir.gd" id="7_dv8so"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerIdle.gd" id="7_m5p01"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerRun.gd" id="8_pufau"]
@@ -261,10 +260,6 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_us8ng"]
-radius = 9.94542
-height = 39.0276
-
 [sub_resource type="Animation" id="Animation_aonlp"]
 resource_name = "Attack1"
 length = 1.016
@@ -291,18 +286,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D/Sword:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_vjof7"]
@@ -332,18 +315,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [4, 5, 6, 7, 8]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D/Sword:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_o0vds"]
 resource_name = "Attack3"
@@ -370,18 +341,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D/Sword:monitoring")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_fx0y2"]
@@ -538,14 +497,6 @@ sprite_frames = SubResource("SpriteFrames_vxlqx")
 animation = &"Basic_Attack"
 frame = 1
 
-[node name="Sword" type="Area2D" parent="AnimatedSprite2D"]
-script = ExtResource("6_y8cpl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Sword"]
-position = Vector2(18, -1)
-scale = Vector2(1.91043, 0.61495)
-shape = SubResource("CapsuleShape2D_us8ng")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.6, 1.6)
 position_smoothing_enabled = true
@@ -593,6 +544,6 @@ next_state = "Attack3"
 script = ExtResource("10_6ne4l")
 player = NodePath("../..")
 animation = "Attack3"
+next_state = null
 
-[connection signal="body_entered" from="AnimatedSprite2D/Sword" to="AnimatedSprite2D/Sword" method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="State MachineV2/Attack" method="_on_animation_player_animation_finished"]

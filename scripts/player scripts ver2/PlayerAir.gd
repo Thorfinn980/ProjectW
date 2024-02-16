@@ -24,7 +24,8 @@ func state_physics_process (delta: float):
 	player.velocity.x = direction * player.SPEED
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()
-	
+	if Input.is_action_just_pressed("Attack"):
+		Transitioned.emit(self,"Attack")
 	# Landing.
 	if player.is_on_floor():
 		if is_equal_approx(player.velocity.x, 0.0):

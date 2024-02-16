@@ -26,5 +26,7 @@ func state_physics_process (delta: float):
 		Transitioned.emit(self,"Air")
 	elif direction == 0:
 		Transitioned.emit(self,"Idle")
+	elif Input.is_action_just_pressed("Attack"):
+		Transitioned.emit(self,"Attack")
 	
 	player.move_and_slide()
