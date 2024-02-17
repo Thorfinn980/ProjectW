@@ -26,4 +26,3 @@ func state_physics_process (_delta: float):
 		Transitioned.emit(self, "Chasing")
 	elif boss.is_on_floor() && not boss.isChasing:
 		Transitioned.emit(self, "Idle")
-	pass

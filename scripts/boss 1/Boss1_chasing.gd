@@ -11,14 +11,14 @@ func exit():
 
 func state_physics_process (_delta: float):
 	var player = boss.player_ref
-	var direction = (player.position - boss.position).normalized()
+	var directionToPlayer = (player.position - boss.position).normalized()
 	
 	# if player on right, move right, 
 	# else left, move left
-	if(direction.x > 0):
-		boss.velocity.x = direction.x * boss.SPEED
+	if(directionToPlayer.x > 0):
+		boss.velocity.x = directionToPlayer.x * boss.SPEED
 	else:
-		boss.velocity.x = direction.x * boss.SPEED
+		boss.velocity.x = directionToPlayer.x * boss.SPEED
 		
 	var distance = abs(player.position.x - boss.position.x)
 	#print("Distance: " + str(distance))
