@@ -1,14 +1,17 @@
-[gd_scene load_steps=27 format=3 uid="uid://7o8udtcij767"]
+[gd_scene load_steps=38 format=3 uid="uid://7o8udtcij767"]
 
-[ext_resource type="Script" path="res://scripts/state machines/State MachineV2.gd" id="1_jivpa"]
 [ext_resource type="Script" path="res://scripts/boss 1/boss_1.gd" id="1_n3m66"]
 [ext_resource type="Texture2D" uid="uid://cd4wqv6wfk8si" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Continuous Attack/player katana continuous attack 80x64.png" id="2_idqxj"]
-[ext_resource type="Script" path="res://scripts/boss 1/Boss1_idle.gd" id="3_ljcho"]
 [ext_resource type="Texture2D" uid="uid://b5gixtkxcp32t" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Attack-Sheathe/player katana attack-sheathe 80x64.png" id="3_oia6k"]
-[ext_resource type="Script" path="res://scripts/boss 1/Boss1_air.gd" id="5_45wj4"]
-[ext_resource type="Script" path="res://scripts/boss 1/Boss1_chasing.gd" id="5_346vh"]
-[ext_resource type="Script" path="res://scripts/boss 1/Boss1_Jump.gd" id="7_ct6qu"]
-[ext_resource type="Script" path="res://scripts/boss 1/Boss1_attack.gd" id="8_erysp"]
+[ext_resource type="Texture2D" uid="uid://1cx3xglo61o4" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Run/player katana run 48x48.png" id="4_dwhaa"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="6_jtv7j"]
+[ext_resource type="Script" path="res://scripts/boss 1/bee_Chase.gd" id="7_b65i6"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="8_5gbf6"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="9_1thjv"]
+[ext_resource type="Script" path="res://scripts/boss 1/bee_isInRange.gd" id="9_tlq3o"]
+[ext_resource type="Script" path="res://scripts/boss 1/bee_Attack1.gd" id="10_3f6x3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="11_fgfdk"]
+[ext_resource type="Script" path="res://scripts/boss 1/Bee_isFar.gd" id="12_08flu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ol2bg"]
 atlas = ExtResource("2_idqxj")
@@ -50,6 +53,38 @@ region = Rect2(640, 0, 80, 64)
 atlas = ExtResource("3_oia6k")
 region = Rect2(720, 0, 80, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wt376"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3cac"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1wkm"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lruh0"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24u1o"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okvts"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlods"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhkqb"]
+atlas = ExtResource("4_dwhaa")
+region = Rect2(336, 0, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_r0p28"]
 animations = [{
 "frames": [{
@@ -90,6 +125,35 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wt376")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3cac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1wkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lruh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24u1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okvts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlods")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhkqb")
+}],
+"loop": true,
+"name": &"Run",
 "speed": 5.0
 }]
 
@@ -162,28 +226,53 @@ tracks/0/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_q7y37"]
+resource_name = "Run"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s1m6y"]
 _data = {
 "Attack1": SubResource("Animation_ucige"),
 "Idle": SubResource("Animation_wd6ef"),
-"RESET": SubResource("Animation_b5ouo")
+"RESET": SubResource("Animation_b5ouo"),
+"Run": SubResource("Animation_q7y37")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gtse"]
-size = Vector2(55.5, 55.5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hpbfb"]
-radius = 156.541
+size = Vector2(16, 35)
 
 [node name="Boss1" type="CharacterBody2D"]
-position = Vector2(-25, -25)
 script = ExtResource("1_n3m66")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(25, 25)
-scale = Vector2(0.7, 0.875)
+position = Vector2(4.54747e-13, 4.54747e-13)
+scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_r0p28")
 animation = &"Idle"
+speed_scale = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -191,43 +280,36 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(24.75, 24.75)
+position = Vector2(-1, 2.5)
 shape = SubResource("RectangleShape2D_3gtse")
 
-[node name="DetectionZone" type="Area2D" parent="."]
-visible = false
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("8_5gbf6")
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@18591")
+actor = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2(25, 25)
-shape = SubResource("CircleShape2D_hpbfb")
-debug_color = Color(0.788235, 0.407843, 0.4, 0.419608)
+[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("9_1thjv")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("1_jivpa")
-initial_state = NodePath("Idle")
+[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("6_jtv7j")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
-script = ExtResource("3_ljcho")
-boss = NodePath("../..")
+[node name="isFar" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite"]
+script = ExtResource("12_08flu")
 
-[node name="Air" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
-script = ExtResource("5_45wj4")
-boss = NodePath("../..")
+[node name="Chase" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite"]
+script = ExtResource("7_b65i6")
 
-[node name="Chasing" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
-script = ExtResource("5_346vh")
-boss = NodePath("../..")
+[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("6_jtv7j")
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
-script = ExtResource("7_ct6qu")
-boss = NodePath("../..")
+[node name="isInRange" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
+script = ExtResource("9_tlq3o")
 
-[node name="Attack1" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
-script = ExtResource("8_erysp")
-boss = NodePath("../..")
+[node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
+script = ExtResource("11_fgfdk")
+wait_time = 2.27
 
-[node name="Cooldown" type="Timer" parent="StateMachine/Attack1"]
-
-[connection signal="body_entered" from="DetectionZone" to="StateMachine/Idle" method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="DetectionZone" to="StateMachine/Chasing" method="_on_detection_zone_body_exited"]
-[connection signal="timeout" from="StateMachine/Attack1/Cooldown" to="StateMachine/Chasing" method="_on_cooldown_timeout"]
+[node name="Attack1" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2/CooldownDecorator"]
+script = ExtResource("10_3f6x3")

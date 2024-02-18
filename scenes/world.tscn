@@ -18,11 +18,11 @@ position = Vector2(-49, 456)
 position = Vector2(688.5, 124.5)
 shape = SubResource("RectangleShape2D_hvk8t")
 
+[node name="Boss1" parent="." groups=["Enemies"] instance=ExtResource("2_pa2e7")]
+position = Vector2(400, -8)
+
 [node name="Panel" type="Panel" parent="."]
 offset_left = -52.0
 offset_top = 446.0
 offset_right = 1327.0
 offset_bottom = 718.0
-
-[node name="Boss1" parent="." groups=["Enemies"] instance=ExtResource("2_pa2e7")]
-position = Vector2(400, -8)
