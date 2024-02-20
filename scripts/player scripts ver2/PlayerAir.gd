@@ -19,7 +19,6 @@ func state_physics_process (delta: float):
 	
 	if player.velocity.y > 0:
 		player.anim.play("Fall")
-	
 	# Account for player horizontal and vertical in AIR STATE
 	player.velocity.x = direction * player.SPEED
 	player.velocity.y += player.gravity * delta

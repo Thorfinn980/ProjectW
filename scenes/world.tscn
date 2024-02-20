@@ -19,10 +19,13 @@ size = Vector2(85, 78)
 [node name="World" type="Node2D"]
 
 [node name="PlayerV2" parent="." groups=["Players"] instance=ExtResource("2_e1b8k")]
-position = Vector2(222.989, 112.989)
+position = Vector2(249, 484)
+
+[node name="Boss1" parent="." groups=["Enemies"] instance=ExtResource("2_pa2e7")]
+position = Vector2(474, 471)
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(-49, 456)
+position = Vector2(-3, 510)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(688.5, 124.5)
@@ -32,10 +35,8 @@ shape = SubResource("RectangleShape2D_hvk8t")
 color = Color(0.172549, 0.172549, 0.172549, 1)
 polygon = PackedVector2Array(3, -10, 3, 259, 1374, 259, 1374, -10)
 
-[node name="Boss1" parent="." groups=["Enemies"] instance=ExtResource("2_pa2e7")]
-position = Vector2(400, -8)
-
-[node name="Stairs" type="Node" parent="."]
+[node name="Stairs" type="Node2D" parent="."]
+position = Vector2(10, 54)
 
 [node name="Stair1" type="StaticBody2D" parent="Stairs"]
 material = SubResource("CanvasItemMaterial_5fgqg")

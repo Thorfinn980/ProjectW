@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://7o8udtcij767"]
+[gd_scene load_steps=42 format=3 uid="uid://7o8udtcij767"]
 
 [ext_resource type="Script" path="res://scripts/boss 1/boss_1.gd" id="1_n3m66"]
 [ext_resource type="Texture2D" uid="uid://cd4wqv6wfk8si" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Continuous Attack/player katana continuous attack 80x64.png" id="2_idqxj"]
@@ -10,7 +10,11 @@
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="9_1thjv"]
 [ext_resource type="Script" path="res://scripts/boss 1/bee_isInRange.gd" id="9_tlq3o"]
 [ext_resource type="Script" path="res://scripts/boss 1/bee_Attack1.gd" id="10_3f6x3"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/leaves/condition.gd" id="10_8stwq"]
+[ext_resource type="Script" path="res://scripts/boss 1/bee_isAbove.gd" id="10_8syj2"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="11_fgfdk"]
+[ext_resource type="Script" path="res://scripts/boss 1/bee_isStuckOnWall.gd" id="11_sh2b3"]
+[ext_resource type="Script" path="res://scripts/boss 1/bee_Jump.gd" id="11_xakwg"]
 [ext_resource type="Script" path="res://scripts/boss 1/Bee_isFar.gd" id="12_08flu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ol2bg"]
@@ -286,7 +290,7 @@ shape = SubResource("RectangleShape2D_3gtse")
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("8_5gbf6")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17485")
+blackboard = NodePath("@Node@184945")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
@@ -301,11 +305,30 @@ script = ExtResource("12_08flu")
 [node name="Chase" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite"]
 script = ExtResource("7_b65i6")
 
+[node name="ifShouldJump" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite"]
+script = ExtResource("6_jtv7j")
+
+[node name="isAbove" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite/ifShouldJump"]
+script = ExtResource("10_8syj2")
+
+[node name="isStuckOnWall" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite/ifShouldJump"]
+script = ExtResource("11_sh2b3")
+
+[node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite/ifShouldJump"]
+script = ExtResource("11_fgfdk")
+wait_time = 0.295
+
+[node name="Jump" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite/ifShouldJump/CooldownDecorator"]
+script = ExtResource("11_xakwg")
+
 [node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorComposite"]
 script = ExtResource("6_jtv7j")
 
 [node name="isInRange" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
 script = ExtResource("9_tlq3o")
+
+[node name="isNotAbove" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
+script = ExtResource("10_8stwq")
 
 [node name="CooldownDecorator" type="Node" parent="BeehaveTree/SelectorComposite/SequenceComposite2"]
 script = ExtResource("11_fgfdk")
