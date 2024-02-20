@@ -286,7 +286,7 @@ shape = SubResource("RectangleShape2D_3gtse")
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("8_5gbf6")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@18591")
+blackboard = NodePath("@Node@17485")
 actor = NodePath("..")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree"]
