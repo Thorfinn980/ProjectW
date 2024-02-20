@@ -8,6 +8,6 @@ func tick(actor, blackboard: Blackboard):
 		actor.anim.play("Attack1")
 		actor.anim.animation_set_next("Attack1", "Idle")
 		return RUNNING
-	print("Attacked")
+	print("Boss1 Attacked")
 	return SUCCESS
 
