@@ -1,3 +1,4 @@
+#extend the state machine
 extends StateV2
 class_name PlayerBlock
 
@@ -7,14 +8,15 @@ class_name PlayerBlock
 @export var next_state : String
 var action_pressed = false
 
+#begin the blocking when action enters the function
 func enter():
-	# This is a base case for when we press jump
 	print("You are blocking")
+	#play the block animation
 	player.anim.play(animation)
 	action_pressed = false
 
+#exit the blocking
 func exit():
-	# This is a base case for when we land
 	print("You exited blocking")
 	
 func state_physics_process (delta: float):
