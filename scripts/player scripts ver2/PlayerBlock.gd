@@ -19,19 +19,7 @@ func enter():
 func exit():
 	print("You exited blocking")
 	
-func state_physics_process (delta: float):
-	if Input.is_action_just_pressed("Block"):
-		action_pressed = true
-	if next_state and action_pressed:
-		Transitioned.emit(self,next_state)
-	elif player.is_on_floor():
-		if is_equal_approx(player.velocity.x, 0.0):
-			Transitioned.emit(self,"Idle")
-		else:
-			Transitioned.emit(self,"Run")
-	player.velocity.y += player.gravity * delta
-	player.move_and_slide()
 
-
+# when animation finishes playing return to idle state
 func _on_animation_player_animation_finished(anim_name):
-		Transitioned.emit(self,"Idle")
+	Transitioned.emit(self, "Idle")
