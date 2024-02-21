@@ -1,4 +1,4 @@
-extends StateV2
+extends State
 class_name PlayerIdle
 
 @export var player : CharacterBody2D
