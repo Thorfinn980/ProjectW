@@ -22,7 +22,7 @@ size = Vector2(85, 78)
 position = Vector2(249, 484)
 
 [node name="Boss1" parent="." groups=["Enemies"] instance=ExtResource("2_pa2e7")]
-position = Vector2(474, 471)
+position = Vector2(921, 478)
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(-3, 510)
