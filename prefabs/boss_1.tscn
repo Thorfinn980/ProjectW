@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://7o8udtcij767"]
+[gd_scene load_steps=53 format=3 uid="uid://7o8udtcij767"]
 
 [ext_resource type="Script" path="res://scripts/boss 1/boss_1.gd" id="1_n3m66"]
 [ext_resource type="Texture2D" uid="uid://cd4wqv6wfk8si" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Continuous Attack/player katana continuous attack 80x64.png" id="2_idqxj"]
@@ -265,6 +265,47 @@ _data = {
 "Run": SubResource("Animation_q7y37")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ca8wt"]
+animation = &"Attack1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wytnl"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u45yy"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_geuvm"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_phacf"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uskny"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rfo5g"]
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3s8xg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hrfhc"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m65em"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ahg8w"]
+states/Attack1/node = SubResource("AnimationNodeAnimation_ca8wt")
+states/Attack1/position = Vector2(530, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_wytnl")
+states/Idle/position = Vector2(318, 100)
+states/Run/node = SubResource("AnimationNodeAnimation_u45yy")
+states/Run/position = Vector2(421, -36)
+states/Start/position = Vector2(185, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_geuvm"), "Attack1", "Idle", SubResource("AnimationNodeStateMachineTransition_phacf"), "Idle", "Attack1", SubResource("AnimationNodeStateMachineTransition_uskny"), "Run", "Attack1", SubResource("AnimationNodeStateMachineTransition_rfo5g"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_3s8xg"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_hrfhc"), "Attack1", "Run", SubResource("AnimationNodeStateMachineTransition_m65em")]
+graph_offset = Vector2(-279, -104)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gtse"]
 size = Vector2(16, 35)
 
@@ -282,6 +323,13 @@ speed_scale = 2.0
 libraries = {
 "": SubResource("AnimationLibrary_s1m6y")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s1m6y")
+}
+tree_root = SubResource("AnimationNodeStateMachine_ahg8w")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 2.5)
