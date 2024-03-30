@@ -17,7 +17,7 @@ func _ready():
 			# Any time we register a new state we connect the transitions
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(on_child_transition)
-			child.playback = anim_tree["parameters/playback"]
+			child.playback = anim_tree["parameters/AnimationStateMachine/playback"]
 		else:
 			push_warning("Child" + child.name + "is not a State for State Machine")
 	

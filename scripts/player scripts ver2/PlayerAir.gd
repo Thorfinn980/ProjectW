@@ -7,7 +7,7 @@ func enter():
 	# This is a base case for when we press jump
 	print("You are jumping")
 	player.velocity.y = player.JUMP_VELOCITY
-	player.anim.play("Jump")
+	# player.anim.play("Jump")
 	
 func exit():
 	playback.travel(landing_animation)

@@ -715,12 +715,12 @@ states/Move/position = Vector2(344, 100)
 states/Roll/node = SubResource("AnimationNodeAnimation_ompsa")
 states/Roll/position = Vector2(597, 100)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_hnawq"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_jitm5"), "Jump", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_o85fw"), "JumpEnd", "Move", SubResource("AnimationNodeStateMachineTransition_v5wli"), "Move", "Roll", SubResource("AnimationNodeStateMachineTransition_fyypl"), "Roll", "Move", SubResource("AnimationNodeStateMachineTransition_ugkos"), "Move", "Attack1", SubResource("AnimationNodeStateMachineTransition_pkm6x"), "Attack1", "Move", SubResource("AnimationNodeStateMachineTransition_0bfno"), "Attack1", "Attack2", SubResource("AnimationNodeStateMachineTransition_8dkfj"), "Attack2", "Move", SubResource("AnimationNodeStateMachineTransition_f6i1a"), "Attack2", "Attack3", SubResource("AnimationNodeStateMachineTransition_0rscs"), "Attack3", "Move", SubResource("AnimationNodeStateMachineTransition_avull")]
-graph_offset = Vector2(-113, -39)
+graph_offset = Vector2(-7, 32)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7dfm2"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j3l4o"]
-graph_offset = Vector2(-534.503, 46.012)
+graph_offset = Vector2(-607.115, 66.5566)
 nodes/AnimationStateMachine/node = SubResource("AnimationNodeStateMachine_ge36a")
 nodes/AnimationStateMachine/position = Vector2(-260, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7dfm2")
@@ -739,7 +739,7 @@ shape = SubResource("CapsuleShape2D_vvj3k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vxlqx")
-animation = &"Jump"
+animation = &"Basic_Attack"
 frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
