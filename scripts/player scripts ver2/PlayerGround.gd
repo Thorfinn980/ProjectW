@@ -10,7 +10,7 @@ func enter():
 
 func state_physics_process (delta: float):
 	delta_roll = delta
-	print(player.roll_direction)
+	#print(player.roll_direction)
 	if(!player.is_on_floor()):
 		Transitioned.emit(self,"Air")
 

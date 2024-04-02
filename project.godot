@@ -19,6 +19,15 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 
+[file_customization]
+
+folder_colors={
+"res://graphics/": "orange",
+"res://prefabs/": "green",
+"res://scenes/": "yellow",
+"res://scripts/": "red"
+}
+
 [input]
 
 Left={

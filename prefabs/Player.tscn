@@ -1,6 +1,6 @@
 [gd_scene load_steps=90 format=3 uid="uid://bo1aalxmfx57p"]
 
-[ext_resource type="Script" path="res://prefabs/Player.gd" id="1_pru7v"]
+[ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://cd4wqv6wfk8si" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Continuous Attack/player katana continuous attack 80x64.png" id="2_ecmwe"]
 [ext_resource type="Texture2D" uid="uid://b5gixtkxcp32t" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Attack-Sheathe/player katana attack-sheathe 80x64.png" id="3_3p0xq"]
 [ext_resource type="Texture2D" uid="uid://dvxv1w66tkme5" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V1/Player Jump/player jump 48x48.png" id="4_3ump4"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAir.gd" id="7_dv8so"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerGround.gd" id="8_pufau"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAttack.gd" id="10_6ne4l"]
-[ext_resource type="Script" path="res://prefabs/Sword.gd" id="10_r1sj5"]
+[ext_resource type="Script" path="res://scripts/utilities/Sword.gd" id="10_r1sj5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 5.0
@@ -715,12 +715,12 @@ states/Move/position = Vector2(344, 100)
 states/Roll/node = SubResource("AnimationNodeAnimation_ompsa")
 states/Roll/position = Vector2(597, 100)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_hnawq"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_jitm5"), "Jump", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_o85fw"), "JumpEnd", "Move", SubResource("AnimationNodeStateMachineTransition_v5wli"), "Move", "Roll", SubResource("AnimationNodeStateMachineTransition_fyypl"), "Roll", "Move", SubResource("AnimationNodeStateMachineTransition_ugkos"), "Move", "Attack1", SubResource("AnimationNodeStateMachineTransition_pkm6x"), "Attack1", "Move", SubResource("AnimationNodeStateMachineTransition_0bfno"), "Attack1", "Attack2", SubResource("AnimationNodeStateMachineTransition_8dkfj"), "Attack2", "Move", SubResource("AnimationNodeStateMachineTransition_f6i1a"), "Attack2", "Attack3", SubResource("AnimationNodeStateMachineTransition_0rscs"), "Attack3", "Move", SubResource("AnimationNodeStateMachineTransition_avull")]
-graph_offset = Vector2(-113, -39)
+graph_offset = Vector2(7, -21)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7dfm2"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j3l4o"]
-graph_offset = Vector2(-534.503, 46.012)
+graph_offset = Vector2(-313, 46)
 nodes/AnimationStateMachine/node = SubResource("AnimationNodeStateMachine_ge36a")
 nodes/AnimationStateMachine/position = Vector2(-260, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7dfm2")
@@ -739,7 +739,7 @@ shape = SubResource("CapsuleShape2D_vvj3k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vxlqx")
-animation = &"Jump"
+animation = &"Basic_Attack"
 frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -789,7 +789,6 @@ player = NodePath("../..")
 wait_time = 0.3
 
 [node name="Sword" type="Area2D" parent="."]
-monitoring = false
 script = ExtResource("10_r1sj5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]

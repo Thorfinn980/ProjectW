@@ -10,6 +10,7 @@ func _ready():
 	previous_state = current_state
 	current_state.enter()
  
+# Simpler Change of States
 func change_state(state):
 	current_state = find_child(state) as State
 	current_state.enter()

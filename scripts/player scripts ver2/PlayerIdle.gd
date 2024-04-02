@@ -1,8 +1,6 @@
 extends State
 class_name PlayerIdle
 
-@export var player : CharacterBody2D
-
 func enter():
 	print("You are idling")
 	

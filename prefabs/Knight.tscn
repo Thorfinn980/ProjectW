@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://tobey8h3tthq"]
 
 [ext_resource type="Texture2D" uid="uid://dtrd11arq65v5" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="1_4uwgi"]
-[ext_resource type="Script" path="res://prefabs/Damageable.gd" id="2_sbap8"]
+[ext_resource type="Script" path="res://scripts/utilities/Damageable.gd" id="2_sbap8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh5xr"]
 size = Vector2(26, 39)
