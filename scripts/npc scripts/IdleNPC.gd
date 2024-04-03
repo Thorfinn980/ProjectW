@@ -3,14 +3,20 @@ class_name EnemyIdle
 
 var move_direction: Vector2
 @export var move_speed := 40.0
-@export var enemy : CharacterBody2D
-var Player : CharacterBody2D
+@onready var collision = $"../../PlayerDetection/CollisionShape2D"
 
-func state_physics_process (_delta: float):
-	if enemy:
-		enemy.velocity = move_direction * move_speed
+var player_entered: bool = false:
+	set(value):
+		player_entered = value
+		collision.set_deferred("disabled", value)
 
-	var direction = player.global_position - enemy.global_position
-	
-	if direction.length() < 30:
-		Transitioned.emit(self, "follow")
+func _physics_process (_delta: float):
+	if player_entered:
+		Transitioned.emit(self, "Follow")
+
+func _on_player_detection_body_entered(body):
+	if body.name == "Player":
+		print("Player")
+	print(body.name)
+	player_entered = true
+	print(player_entered)

@@ -215,12 +215,12 @@ graph_offset = Vector2(-302, -157)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ebol"]
 graph_offset = Vector2(-336, 41)
-nodes/AnimationStateMachine/node = SubResource("AnimationNodeStateMachine_nctxj")
-nodes/AnimationStateMachine/position = Vector2(-120, 140)
+nodes/BossAnimationStateMachine/node = SubResource("AnimationNodeStateMachine_nctxj")
+nodes/BossAnimationStateMachine/position = Vector2(-120, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_slyt7")
 nodes/TimeScale/position = Vector2(180, 140)
 nodes/output/position = Vector2(340, 140)
-node_connections = [&"TimeScale", 0, &"AnimationStateMachine", &"output", 0, &"TimeScale"]
+node_connections = [&"TimeScale", 0, &"BossAnimationStateMachine", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fke1r"]
 atlas = ExtResource("2_dn4gl")
@@ -678,7 +678,7 @@ height = 100.0
 radius = 197.428
 
 [node name="Oni" type="CharacterBody2D"]
-collision_layer = 3
+collision_layer = 2
 script = ExtResource("1_w1y1n")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -687,7 +687,7 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeBlendTree_8ebol")
 anim_player = NodePath("../AnimationPlayer")
-parameters/AnimationStateMachine/move/blend_position = 0.0
+parameters/BossAnimationStateMachine/move/blend_position = 0.0
 parameters/TimeScale/scale = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

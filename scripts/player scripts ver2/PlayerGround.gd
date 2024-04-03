@@ -1,6 +1,7 @@
 extends State
 class_name PlayerGround
 
+@export var player : CharacterBody2D
 @onready var anim_tree : AnimationTree = $"../../AnimationTree"
 var delta_roll
 var IsRolling = false

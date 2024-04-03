@@ -11,7 +11,6 @@ class_name State
 # 	 that you are intending to transition
 signal Transitioned
 
-@export var player : CharacterBody2D
 @export var can_move : bool = true
 var playback : AnimationNodeStateMachinePlayback
 var next_state : State
@@ -24,7 +23,7 @@ func enter():
 func exit():
 	pass
 
-func state_input(event : InputEvent):
+func state_input(_event : InputEvent):
 	pass
 
 # similar to _process but for states, render everything except for physics.

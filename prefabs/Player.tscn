@@ -730,7 +730,7 @@ node_connections = [&"TimeScale", 0, &"AnimationStateMachine", &"output", 0, &"T
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eg0fe"]
 size = Vector2(33, 30)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_pru7v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

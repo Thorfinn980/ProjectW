@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name OniEnemy
 
 const SPEED = 300.0
-var direction : Vector2
+var direction : Vector2 = Vector2.ZERO
 #@export var playerNodePath: NodePath
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -18,12 +18,12 @@ func _physics_process(delta):
 
 	move_and_slide()
 	update_animation()
-	update_direction(direction)
+	update_direction()
 
 func update_animation():
-	anim_tree.set("parameters/AnimationStateMachine/move/blend_position", direction.x)
+	anim_tree.set("parameters/BossAnimationStateMachine/move/blend_position", direction.x)
 
-func update_direction(direction):
+func update_direction():
 	if direction.x > 0:
 		sprite.flip_h = false
 	else:

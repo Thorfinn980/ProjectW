@@ -6,6 +6,7 @@ class_name PlayerAttack
 @export var attack_two : String = "Attack2"
 @export var attack_three : String = "Attack3"
 
+@export var player : CharacterBody2D
 @onready var timer : Timer = $Timer
 
 func enter():
