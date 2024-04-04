@@ -21,4 +21,8 @@ func state_physics_process (_delta: float):
 	
 	if direction.length() > 55:
 		Transitioned.emit(self, "Idle")
-		
+	
+	if abs(enemy.global_position.x - player.global_position.x) < 120:
+		enemy.velocity = Vector2.ZERO
+		Transitioned.emit(self, "Attack")
+		playback.travel("attack")

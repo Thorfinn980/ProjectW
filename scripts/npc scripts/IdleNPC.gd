@@ -13,6 +13,7 @@ var player_entered: bool = false:
 func _physics_process (_delta: float):
 	if player_entered:
 		Transitioned.emit(self, "Follow")
+		playback.travel("move")
 
 func _on_player_detection_body_entered(body):
 	if body.name == "Player":

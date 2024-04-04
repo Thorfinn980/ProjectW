@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cq258l1e6pjyr"]
 
-[ext_resource type="PackedScene" uid="uid://bo1aalxmfx57p" path="res://prefabs/player.tscn" id="2_e1b8k"]
+[ext_resource type="PackedScene" uid="uid://bo1aalxmfx57p" path="res://prefabs/Player.tscn" id="2_e1b8k"]
 [ext_resource type="PackedScene" uid="uid://tobey8h3tthq" path="res://prefabs/Knight.tscn" id="2_wm28l"]
 [ext_resource type="PackedScene" uid="uid://ds053xl5xus70" path="res://prefabs/Oni.tscn" id="3_7ylo1"]
 
@@ -28,5 +28,5 @@ position = Vector2(384, 446)
 [node name="Player" parent="." instance=ExtResource("2_e1b8k")]
 position = Vector2(-28, 425)
 
-[node name="Oni" parent="." instance=ExtResource("3_7ylo1")]
+[node name="Oni" parent="." groups=["Oni"] instance=ExtResource("3_7ylo1")]
 position = Vector2(685, 394)

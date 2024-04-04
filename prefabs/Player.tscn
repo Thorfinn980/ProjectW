@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=91 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://cd4wqv6wfk8si" path="res://graphics/Asset Packs 1-4 (final)/Asset Pack-V4/Player Katana Continuous Attack/player katana continuous attack 80x64.png" id="2_ecmwe"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerGround.gd" id="8_pufau"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAttack.gd" id="10_6ne4l"]
 [ext_resource type="Script" path="res://scripts/utilities/Sword.gd" id="10_r1sj5"]
+[ext_resource type="Script" path="res://scripts/utilities/Damageable.gd" id="12_2bnhd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 5.0
@@ -794,6 +795,9 @@ script = ExtResource("10_r1sj5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2(23.5, 0)
 shape = SubResource("RectangleShape2D_eg0fe")
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("12_2bnhd")
 
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_animation_tree_animation_finished"]

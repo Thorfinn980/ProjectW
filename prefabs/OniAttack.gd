@@ -1,0 +1,21 @@
+extends State
+class_name EnemyAttack
+
+@onready var FinishTimer: Timer = $FinishTimer
+@onready var HitTimer: Timer = $HitTimer
+@export var Hitbox: Area2D
+
+func enter():
+	print("Oni attacking")
+	HitTimer.start()
+	FinishTimer.start()
+
+# check if player in hitbox
+func _on_hit_timer_timeout():
+	Hitbox.damage()
+	pass
+
+
+func finish_timer():
+	Transitioned.emit(self, "Follow")
+	playback.travel("move")

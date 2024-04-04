@@ -682,8 +682,7 @@ resource_name = "attackHitbox"
 script/source = "extends Area2D
 var player: CharacterBody2D
 var oni: CharacterBody2D
-var do_damage: bool = false
-var damage = 10
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_first_node_in_group(\"Player\")
@@ -693,6 +692,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(player.global_position.x)
+	print(oni.global_position.x)
+	
 	# flips hitbox
 	if player.global_position.x > oni.global_position.x:
 		#right
@@ -700,19 +702,11 @@ func _process(delta):
 	else:
 		scale.x = 1
 
-func do_some_damage():
-	if do_damage:
-		player.hit(damage)
-	
 
 func _on_body_entered(body):
 	if body.name == \"Player\":
-		do_damage = true
-
-
-func _on_body_exited(body):
-		if body.name == \"Player\":
-			do_damage = false
+		
+	pass # Replace with function body.
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oswho"]
@@ -740,7 +734,7 @@ libraries = {
 position = Vector2(0, -79)
 sprite_frames = SubResource("SpriteFrames_lk37o")
 animation = &"attack"
-frame = 9
+frame = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -50)
@@ -765,15 +759,11 @@ script = ExtResource("3_mrynw")
 script = ExtResource("4_wysyg")
 enemy = NodePath("../..")
 
-[node name="Attack" type="Node2D" parent="State Machine" node_paths=PackedStringArray("Hitbox")]
+[node name="Attack" type="Node2D" parent="State Machine"]
 script = ExtResource("6_c6t8b")
-Hitbox = NodePath("Hitbox")
 
-[node name="FinishTimer" type="Timer" parent="State Machine/Attack"]
+[node name="Timer" type="Timer" parent="State Machine/Attack"]
 wait_time = 1.393
-
-[node name="HitTimer" type="Timer" parent="State Machine/Attack"]
-wait_time = 0.751
 
 [node name="Hitbox" type="Area2D" parent="State Machine/Attack"]
 script = SubResource("GDScript_st45o")
@@ -786,7 +776,4 @@ shape = SubResource("RectangleShape2D_oswho")
 script = ExtResource("6_5s85n")
 
 [connection signal="body_entered" from="PlayerDetection" to="State Machine/Idle" method="_on_player_detection_body_entered"]
-[connection signal="timeout" from="State Machine/Attack/FinishTimer" to="State Machine/Attack" method="finish_timer"]
-[connection signal="timeout" from="State Machine/Attack/HitTimer" to="State Machine/Attack" method="_on_hit_timer_timeout"]
 [connection signal="body_entered" from="State Machine/Attack/Hitbox" to="State Machine/Attack/Hitbox" method="_on_body_entered"]
-[connection signal="body_exited" from="State Machine/Attack/Hitbox" to="State Machine/Attack/Hitbox" method="_on_body_exited"]
