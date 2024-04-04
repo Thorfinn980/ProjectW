@@ -13,7 +13,7 @@ func enter():
 
 # check if player in hitbox
 func _on_hit_timer_timeout():
-	Hitbox.damage()
+	Hitbox.do_some_damage()
 
 
 func finish_timer():
