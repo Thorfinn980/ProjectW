@@ -11,6 +11,9 @@ var playback : AnimationNodeStateMachinePlayback
 @onready var anim_tree : AnimationTree = $AnimationTree
 @onready var sprite = get_node("AnimatedSprite2D")
 
+func _ready():
+	anim_tree.active = true
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():

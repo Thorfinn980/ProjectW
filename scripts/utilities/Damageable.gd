@@ -5,6 +5,5 @@ class_name Damageable
 
 func hit(damage : int):
 	health -= damage
-	
 	if health <= 0:
 		get_parent().queue_free()

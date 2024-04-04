@@ -7,6 +7,7 @@ class_name EnemyAttack
 
 func enter():
 	print("Oni attacking")
+	playback.travel("attack")
 	HitTimer.start()
 	FinishTimer.start()
 

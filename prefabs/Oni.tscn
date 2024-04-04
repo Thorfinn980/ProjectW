@@ -38,6 +38,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State Machine/Attack/Machete:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_6yib0"]
 resource_name = "death"
@@ -696,7 +708,7 @@ var damage = 10
 func _ready():
 	player = get_tree().get_first_node_in_group(\"Player\")
 	oni = get_tree().get_first_node_in_group(\"Oni\")
-
+	#monitoring = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -710,16 +722,14 @@ func _process(delta):
 func do_some_damage():
 	if do_damage:
 		player.hit(damage)
-	
 
 func _on_body_entered(body):
 	if body.name == \"Player\":
 		do_damage = true
 
-
 func _on_body_exited(body):
-		if body.name == \"Player\":
-			do_damage = false
+	if body.name == \"Player\":
+		do_damage = false
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oswho"]
@@ -729,7 +739,13 @@ size = Vector2(75, 41)
 collision_layer = 3
 script = ExtResource("1_w1y1n")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ngtn")
+}
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_2ngtn")
 }
@@ -738,16 +754,11 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/AnimationStateMachine/move/blend_position = 0.0
 parameters/TimeScale/scale = 1.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_2ngtn")
-}
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -79)
 sprite_frames = SubResource("SpriteFrames_lk37o")
-animation = &"idle"
-frame = 5
+animation = &"attack"
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -50)
@@ -774,7 +785,7 @@ enemy = NodePath("../..")
 
 [node name="Attack" type="Node2D" parent="State Machine" node_paths=PackedStringArray("Hitbox")]
 script = ExtResource("6_c6t8b")
-Hitbox = NodePath("Hitbox")
+Hitbox = NodePath("Machete")
 
 [node name="FinishTimer" type="Timer" parent="State Machine/Attack"]
 wait_time = 1.393
@@ -782,10 +793,10 @@ wait_time = 1.393
 [node name="HitTimer" type="Timer" parent="State Machine/Attack"]
 wait_time = 0.751
 
-[node name="Hitbox" type="Area2D" parent="State Machine/Attack"]
+[node name="Machete" type="Area2D" parent="State Machine/Attack"]
 script = SubResource("GDScript_st45o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="State Machine/Attack/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="State Machine/Attack/Machete"]
 position = Vector2(-66.5, -20.5)
 shape = SubResource("RectangleShape2D_oswho")
 
@@ -795,5 +806,5 @@ script = ExtResource("6_5s85n")
 [connection signal="body_entered" from="PlayerDetection" to="State Machine/Idle" method="_on_player_detection_body_entered"]
 [connection signal="timeout" from="State Machine/Attack/FinishTimer" to="State Machine/Attack" method="finish_timer"]
 [connection signal="timeout" from="State Machine/Attack/HitTimer" to="State Machine/Attack" method="_on_hit_timer_timeout"]
-[connection signal="body_entered" from="State Machine/Attack/Hitbox" to="State Machine/Attack/Hitbox" method="_on_body_entered"]
-[connection signal="body_exited" from="State Machine/Attack/Hitbox" to="State Machine/Attack/Hitbox" method="_on_body_exited"]
+[connection signal="body_entered" from="State Machine/Attack/Machete" to="State Machine/Attack/Machete" method="_on_body_entered"]
+[connection signal="body_exited" from="State Machine/Attack/Machete" to="State Machine/Attack/Machete" method="_on_body_exited"]
