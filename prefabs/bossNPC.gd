@@ -17,14 +17,3 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	move_and_slide()
-	update_animation()
-	update_direction()
-
-func update_animation():
-	anim_tree.set("parameters/BossAnimationStateMachine/move/blend_position", direction.x)
-
-func update_direction():
-	if direction.x > 0:
-		sprite.flip_h = false
-	else:
-		sprite.flip_h = true

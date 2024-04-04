@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://ds053xl5xus70"]
+[gd_scene load_steps=95 format=3 uid="uid://ds053xl5xus70"]
 
 [ext_resource type="Script" path="res://prefabs/bossNPC.gd" id="1_w1y1n"]
 [ext_resource type="Texture2D" uid="uid://d2xuvwkhnaij" path="res://graphics/individual sprites/demon_slime_FREE_v1.0_288x160_spritesheet.png" id="2_dn4gl"]
@@ -98,6 +98,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_blw4f"]
 resource_name = "idle"
 length = 0.628
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -126,6 +127,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_vi6bw"]
 resource_name = "run"
 length = 1.2015
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -170,22 +172,27 @@ animation = &"death"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vhpvr"]
 animation = &"hurt"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_npxj2"]
-animation = &"idle"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_44671"]
 animation = &"run"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cpbux"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dlvnl"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q6ebk"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3t3op"]
 animation = &"run"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_jb2i3"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_npxj2")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_44671")
-blend_point_1/pos = 1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_cpbux")
-blend_point_2/pos = -1.0
+blend_point_0/node = SubResource("AnimationNodeAnimation_44671")
+blend_point_0/pos = 1.4
+blend_point_1/node = SubResource("AnimationNodeAnimation_dlvnl")
+blend_point_1/pos = 0.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_q6ebk")
+blend_point_2/pos = 1.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_3t3op")
+blend_point_3/pos = -1.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uqa16"]
@@ -215,6 +222,7 @@ graph_offset = Vector2(-302, -157)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_slyt7"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ebol"]
+graph_offset = Vector2(-575.591, 203.953)
 nodes/AnimationStateMachine/node = SubResource("AnimationNodeStateMachine_nctxj")
 nodes/AnimationStateMachine/position = Vector2(-120, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_slyt7")
@@ -688,7 +696,6 @@ var damage = 10
 func _ready():
 	player = get_tree().get_first_node_in_group(\"Player\")
 	oni = get_tree().get_first_node_in_group(\"Oni\")
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -728,7 +735,7 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeBlendTree_8ebol")
 anim_player = NodePath("../AnimationPlayer")
-parameters/AnimationStateMachine/move/blend_position = -0.117212
+parameters/AnimationStateMachine/move/blend_position = 0.0
 parameters/TimeScale/scale = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -739,8 +746,8 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -79)
 sprite_frames = SubResource("SpriteFrames_lk37o")
-animation = &"attack"
-frame = 9
+animation = &"idle"
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -50)
