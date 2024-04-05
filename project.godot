@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="Somewhere Else"
+<<<<<<< Updated upstream
 run/main_scene="res://scenes/main.tscn"
+=======
+run/main_scene="res://scenes/Home.tscn"
+>>>>>>> Stashed changes
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
