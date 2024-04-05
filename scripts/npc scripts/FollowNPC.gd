@@ -30,7 +30,6 @@ func state_physics_process (_delta: float):
 	update_direction()
 
 func update_animation():
-	print(direction.x)
 	anim_tree.set("parameters/AnimationStateMachine/move/blend_position", direction.x)
 
 func update_direction():

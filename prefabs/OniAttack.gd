@@ -17,5 +17,5 @@ func _on_hit_timer_timeout():
 
 
 func finish_timer():
-	Transitioned.emit(self, "Follow")
+	Transitioned.emit(self , "Follow")
 	playback.travel("move")

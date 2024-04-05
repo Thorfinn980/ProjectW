@@ -721,7 +721,10 @@ func _process(delta):
 
 func do_some_damage():
 	if do_damage:
-		player.hit(damage)
+		var children = player.get_children()
+		for kid in children:
+			if kid is Damageable:
+				kid.hit(10)
 
 func _on_body_entered(body):
 	if body.name == \"Player\":
@@ -733,7 +736,7 @@ func _on_body_exited(body):
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oswho"]
-size = Vector2(75, 41)
+size = Vector2(74, 40)
 
 [node name="Oni" type="CharacterBody2D"]
 collision_layer = 3
@@ -797,7 +800,7 @@ wait_time = 0.751
 script = SubResource("GDScript_st45o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="State Machine/Attack/Machete"]
-position = Vector2(-66.5, -20.5)
+position = Vector2(-67, -21)
 shape = SubResource("RectangleShape2D_oswho")
 
 [node name="Damageable" type="Node" parent="."]
