@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq258l1e6pjyr"]
+[gd_scene load_steps=4 format=3 uid="uid://cq258l1e6pjyr"]
 
 [ext_resource type="PackedScene" uid="uid://bo1aalxmfx57p" path="res://prefabs/Player.tscn" id="2_e1b8k"]
-[ext_resource type="PackedScene" uid="uid://tobey8h3tthq" path="res://prefabs/Knight.tscn" id="2_wm28l"]
 [ext_resource type="PackedScene" uid="uid://ds053xl5xus70" path="res://prefabs/Oni.tscn" id="3_7ylo1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvk8t"]
@@ -22,11 +21,8 @@ offset_top = 446.0
 offset_right = 1327.0
 offset_bottom = 718.0
 
-[node name="Knight" parent="." instance=ExtResource("2_wm28l")]
-position = Vector2(384, 446)
-
 [node name="Player" parent="." instance=ExtResource("2_e1b8k")]
-position = Vector2(-28, 425)
+position = Vector2(-29, 447)
 
 [node name="Oni" parent="." groups=["Oni"] instance=ExtResource("3_7ylo1")]
-position = Vector2(685, 394)
+position = Vector2(785, 446)

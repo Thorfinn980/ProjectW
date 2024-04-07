@@ -13,6 +13,6 @@ func enter():
 func exit():
 	playback.travel(landing_animation)
 	
-func state_process(delta):
+func state_process(_delta):
 	if(player.is_on_floor()):
 		Transitioned.emit(self, "Ground")

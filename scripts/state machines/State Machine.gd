@@ -8,6 +8,7 @@ class_name StateMachineFactory
 @export var initial_state : State
 @export var anim_tree : AnimationTree
 var current_state : State
+var previous_state: State
 var states : Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
@@ -40,6 +41,13 @@ func check_if_can_move():
 	
 func _input(event : InputEvent):
 	current_state.state_input(event)
+
+func change_state(state):
+	current_state = find_child(state) as State
+	current_state.enter()
+ 
+	previous_state.exit()
+	previous_state = current_state
 
 # Transition function
 # Checks for oddities as well
