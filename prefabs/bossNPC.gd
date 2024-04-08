@@ -10,6 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var playback : AnimationNodeStateMachinePlayback
 @onready var anim_tree : AnimationTree = $AnimationTree
 @onready var sprite = get_node("AnimatedSprite2D")
+@onready var anim_player : AnimationPlayer = $AnimationPlayer
 
 var health = 100:
 	set(value):

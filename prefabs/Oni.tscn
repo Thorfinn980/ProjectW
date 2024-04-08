@@ -15,6 +15,7 @@ length = 0.001
 [sub_resource type="Animation" id="Animation_ngqnp"]
 resource_name = "attack"
 length = 1.3925
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -216,11 +217,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rcv6k"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uwi2v"]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k1h7l"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ksiqc"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uwi2v"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nctxj"]
 states/End/position = Vector2(444, -16)
@@ -233,8 +234,8 @@ states/hurt/node = SubResource("AnimationNodeAnimation_vhpvr")
 states/hurt/position = Vector2(310, -117)
 states/move/node = SubResource("AnimationNodeBlendSpace1D_jb2i3")
 states/move/position = Vector2(310, -16)
-transitions = ["hurt", "death", SubResource("AnimationNodeStateMachineTransition_uqa16"), "Start", "move", SubResource("AnimationNodeStateMachineTransition_e2lha"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_rcv6k"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_k1h7l"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_ksiqc"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_uwi2v")]
-graph_offset = Vector2(-130, -184)
+transitions = ["hurt", "death", SubResource("AnimationNodeStateMachineTransition_uqa16"), "Start", "move", SubResource("AnimationNodeStateMachineTransition_e2lha"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_rcv6k"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_uwi2v"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_k1h7l"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_ksiqc")]
+graph_offset = Vector2(-225, -104)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_slyt7"]
 
@@ -1028,6 +1029,13 @@ flip_h = true
 position = Vector2(0, -50)
 shape = SubResource("CapsuleShape2D_a22hq")
 
+[node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(0, -50)
+shape = SubResource("CircleShape2D_8fguo")
+
 [node name="PlayerDetection" type="Area2D" parent="."]
 collision_layer = 0
 
@@ -1074,6 +1082,7 @@ shape = SubResource("RectangleShape2D_151lq")
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("6_5s85n")
 
+[connection signal="body_exited" from="AttackRange" to="State Machine/Attack" method="_on_attack_range_body_exited"]
 [connection signal="body_entered" from="PlayerDetection" to="State Machine/Idle" method="_on_player_detection_body_entered"]
 [connection signal="timeout" from="State Machine/Attack/FinishTimer" to="State Machine/Attack" method="finish_timer"]
 [connection signal="timeout" from="State Machine/Attack/HitTimer" to="State Machine/Attack" method="_on_hit_timer_timeout"]

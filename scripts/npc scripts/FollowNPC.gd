@@ -17,7 +17,7 @@ func state_process (_delta: float):
 	#if player and player.is_inside_tree():
 		var distance = owner.direction.length()
 		print(distance)
-		if distance < 70:
+		if distance < 75:
 			owner.set_physics_process(false)
 			Transitioned.emit(self, "Attack")
 		elif distance > 130:

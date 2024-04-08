@@ -6,17 +6,15 @@ class_name EnemyAttack
 @export var Hitbox: Area2D
 
 func enter():
-	print("Oni attacking")
+	print("isAttacking")
+	#owner.anim_player.play("attack")
 	playback.travel("attack")
 	#HitTimer.start()
 	#FinishTimer.start()
 
-func state_process(_delta):
-	print("StateOniWorking")
-	print(owner.direction + "It's working")
-	if owner.direction.length() > 70:
-		print("StateOniWorking2")
-		Transitioned.emit(self, "Follow")
+#func state_process(_delta):
+	#if owner.direction.length() > 70:
+		#Transitioned.emit(self, "Follow")
 
 
 ## check if player in hitbox
@@ -27,3 +25,8 @@ func state_process(_delta):
 #func finish_timer():
 	#Transitioned.emit(self , "Follow")
 	#playback.travel("move")
+
+
+func _on_attack_range_body_exited(body):
+	Transitioned.emit(self, "Follow")
+	playback.travel("move")
