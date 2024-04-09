@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://prefabs/bossNPC.gd" id="1_w1y1n"]
 [ext_resource type="Animation" uid="uid://dmvll6omm7ya8" path="res://graphics/animations/attack_2.res" id="2_8n4q8"]
-[ext_resource type="SpriteFrames" uid="uid://ck1jpwrucuw6k" path="res://prefabs/Goblin.tres" id="2_46aod"]
+[ext_resource type="SpriteFrames" uid="uid://c31tteot4tt4r" path="res://prefabs/Goblin.tres" id="2_46aod"]
 [ext_resource type="Script" path="res://prefabs/FSM.gd" id="3_k3yi3"]
 [ext_resource type="Animation" uid="uid://of3h8lm5fbom" path="res://graphics/animations/attack_3.res" id="3_lu48k"]
 [ext_resource type="Script" path="res://scripts/npc scripts/IdleNPC.gd" id="3_mrynw"]

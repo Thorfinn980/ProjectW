@@ -31,7 +31,7 @@ size = Vector2(191.25, 68.05)
 size = Vector2(665, 30)
 
 [sub_resource type="Animation" id="Animation_qd1iq"]
-length = 0.7975
+length = 1.013
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -127,7 +127,7 @@ states/idle/position = Vector2(352, 100)
 states/run/node = SubResource("AnimationNodeAnimation_uj6to")
 states/run/position = Vector2(466, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2koar"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hni15"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_5i4n1"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_88coi"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_teg3v"), "run", "dash_attack", SubResource("AnimationNodeStateMachineTransition_7nt0g"), "dash_attack", "run", SubResource("AnimationNodeStateMachineTransition_hnkga"), "run", "attack_2", SubResource("AnimationNodeStateMachineTransition_7fwsf"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_eqyqa"), "run", "attack_3", SubResource("AnimationNodeStateMachineTransition_6qov0"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_upq3j")]
-graph_offset = Vector2(-215, -135)
+graph_offset = Vector2(-58, 5)
 
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 6

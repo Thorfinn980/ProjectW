@@ -15,6 +15,7 @@ var reference_player
 var player_in_range = false
 var attack : bool
 var speed = 20
+var impulse = 0
 
 func _ready():
 	anim_tree.active = true
@@ -58,5 +59,7 @@ func _on_attack_attack_direction(attacking):
 func _on_attack_walk_speed(new_speed):
 	speed = new_speed
 
+
+
 func _on_attack_impulse_attack(force_push):
-	impulse = force_push
+	impulse += force_push
