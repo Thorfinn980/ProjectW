@@ -1,30 +1,28 @@
 [gd_scene load_steps=4 format=3 uid="uid://cq258l1e6pjyr"]
 
 [ext_resource type="PackedScene" uid="uid://bo1aalxmfx57p" path="res://prefabs/Player.tscn" id="2_e1b8k"]
-[ext_resource type="PackedScene" uid="uid://dmkurd0lnrajt" path="res://prefabs/Goblin.tscn" id="2_hxx7m"]
+[ext_resource type="PackedScene" uid="uid://be04pgmdk7jm0" path="res://prefabs/Goblin.tscn" id="2_hxx7m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvk8t"]
-size = Vector2(1371, 269)
+size = Vector2(1376, 264)
 
 [node name="World" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(-49, 456)
 collision_layer = 7
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(688.5, 124.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(689, 124)
 shape = SubResource("RectangleShape2D_hvk8t")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -52.0
-offset_top = 446.0
-offset_right = 1327.0
-offset_bottom = 718.0
+[node name="Polygon2D" type="Polygon2D" parent="Floor"]
+color = Color(0.121569, 0.121569, 0.121569, 1)
+polygon = PackedVector2Array(1377, -8, 1377, 256, 1, 256, 1, -8)
 
 [node name="Player" parent="." instance=ExtResource("2_e1b8k")]
-position = Vector2(-29, 447)
+position = Vector2(-29, 448)
 
 [node name="Goblin" parent="." instance=ExtResource("2_hxx7m")]
-position = Vector2(386, 446)
+position = Vector2(386, 448)
