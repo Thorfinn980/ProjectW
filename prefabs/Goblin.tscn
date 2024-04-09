@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dmkurd0lnrajt"]
+[gd_scene load_steps=41 format=3 uid="uid://dmkurd0lnrajt"]
 
 [ext_resource type="Script" path="res://Goblin.gd" id="1_25ags"]
 [ext_resource type="Script" path="res://scripts/state machines/FiniteStateMachineNPC.gd" id="2_bvxru"]
@@ -75,6 +75,12 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o8fcr"]
 animation = &"attack_1"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_na3ju"]
+animation = &"attack_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g4ac1"]
+animation = &"attack_3"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3piv4"]
 animation = &"dash_attack"
 
@@ -99,16 +105,28 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hnkga"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7fwsf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eqyqa"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6qov0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_upq3j"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2afgd"]
 states/attack_1/node = SubResource("AnimationNodeAnimation_o8fcr")
 states/attack_1/position = Vector2(466, -18)
+states/attack_2/node = SubResource("AnimationNodeAnimation_na3ju")
+states/attack_2/position = Vector2(641, -18)
+states/attack_3/node = SubResource("AnimationNodeAnimation_g4ac1")
+states/attack_3/position = Vector2(710, 100)
 states/dash_attack/node = SubResource("AnimationNodeAnimation_3piv4")
 states/dash_attack/position = Vector2(352, 229)
 states/idle/node = SubResource("AnimationNodeAnimation_abvy7")
 states/idle/position = Vector2(352, 100)
 states/run/node = SubResource("AnimationNodeAnimation_uj6to")
 states/run/position = Vector2(466, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2koar"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hni15"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_5i4n1"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_88coi"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_teg3v"), "run", "dash_attack", SubResource("AnimationNodeStateMachineTransition_7nt0g"), "dash_attack", "run", SubResource("AnimationNodeStateMachineTransition_hnkga")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2koar"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hni15"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_5i4n1"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_88coi"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_teg3v"), "run", "dash_attack", SubResource("AnimationNodeStateMachineTransition_7nt0g"), "dash_attack", "run", SubResource("AnimationNodeStateMachineTransition_hnkga"), "run", "attack_2", SubResource("AnimationNodeStateMachineTransition_7fwsf"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_eqyqa"), "run", "attack_3", SubResource("AnimationNodeStateMachineTransition_6qov0"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_upq3j")]
 graph_offset = Vector2(-215, -135)
 
 [node name="Goblin" type="CharacterBody2D"]
