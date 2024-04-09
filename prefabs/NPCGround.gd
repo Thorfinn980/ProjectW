@@ -4,6 +4,8 @@ class_name NPCIdle
 @export var goblin : CharacterBody2D
 var player_entered = false
 var is_body_inside = false
+
+
 signal idle_speed(new_speed)
 
 func enter():

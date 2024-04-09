@@ -58,6 +58,5 @@ func _on_attack_attack_direction(attacking):
 func _on_attack_walk_speed(new_speed):
 	speed = new_speed
 
-
 func _on_attack_impulse_attack(force_push):
-	pass # Replace with function body.
+	impulse = force_push

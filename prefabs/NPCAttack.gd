@@ -6,12 +6,14 @@ var has_attack = false
 
 signal attack_direction(attacking)
 signal walk_speed(new_speed)
+signal impulse_attack(force_push)
 
 
 func enter():
 	# This is a base case for when we press jump
 	emit_signal("attack_direction", true)
 	emit_signal("walk_speed", 0)
+	emit_signal("impulse_attack", 10)
 	playback.travel("attack_1")
 	print("isAttack")
 
