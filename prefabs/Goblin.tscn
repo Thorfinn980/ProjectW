@@ -1,0 +1,193 @@
+[gd_scene load_steps=35 format=3 uid="uid://dmkurd0lnrajt"]
+
+[ext_resource type="Script" path="res://Goblin.gd" id="1_25ags"]
+[ext_resource type="Script" path="res://scripts/state machines/FiniteStateMachineNPC.gd" id="2_bvxru"]
+[ext_resource type="Script" path="res://prefabs/NPCGround.gd" id="3_ir51q"]
+[ext_resource type="SpriteFrames" uid="uid://ck1jpwrucuw6k" path="res://prefabs/Goblin.tres" id="3_wjic7"]
+[ext_resource type="Animation" uid="uid://b1c8ejnhb6sqd" path="res://graphics/animations/attack_1.res" id="4_0nmuw"]
+[ext_resource type="Script" path="res://prefabs/NPCAttack.gd" id="4_12gls"]
+[ext_resource type="Script" path="res://prefabs/NPCRun.gd" id="4_ggekw"]
+[ext_resource type="Animation" uid="uid://dmvll6omm7ya8" path="res://graphics/animations/attack_2.res" id="5_irxrb"]
+[ext_resource type="Animation" uid="uid://of3h8lm5fbom" path="res://graphics/animations/attack_3.res" id="6_0qccc"]
+[ext_resource type="Animation" uid="uid://bcbce8n4b5rkq" path="res://graphics/animations/charge_1.res" id="7_5fjq5"]
+[ext_resource type="Animation" uid="uid://c2t5v2151wal5" path="res://graphics/animations/charge_2.res" id="8_plkiq"]
+[ext_resource type="Animation" uid="uid://y03r4bat7jtp" path="res://graphics/animations/dash_attack.res" id="9_tvwyj"]
+[ext_resource type="Animation" uid="uid://co32cdyphmnxd" path="res://graphics/animations/death.res" id="10_bjhpw"]
+[ext_resource type="Animation" uid="uid://btk5d8rutnvvq" path="res://graphics/animations/hurt.res" id="11_ayhue"]
+[ext_resource type="Animation" uid="uid://cxlsosx2jf3eb" path="res://graphics/animations/run.res" id="12_8gue0"]
+[ext_resource type="Animation" uid="uid://bqb4mfnr2w73p" path="res://graphics/animations/idle.res" id="13_emxni"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0cop"]
+radius = 27.0
+height = 74.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8707k"]
+size = Vector2(88, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1kvm2"]
+size = Vector2(191.25, 68.05)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxxad"]
+size = Vector2(665, 30)
+
+[sub_resource type="Animation" id="Animation_qd1iq"]
+length = 0.7975
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5tcdk"]
+_data = {
+"RESET": SubResource("Animation_qd1iq"),
+"attack_1": ExtResource("4_0nmuw"),
+"attack_2": ExtResource("5_irxrb"),
+"attack_3": ExtResource("6_0qccc"),
+"charge_1": ExtResource("7_5fjq5"),
+"charge_2": ExtResource("8_plkiq"),
+"dash_attack": ExtResource("9_tvwyj"),
+"death": ExtResource("10_bjhpw"),
+"hurt": ExtResource("11_ayhue"),
+"idle": ExtResource("13_emxni"),
+"run": ExtResource("12_8gue0")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o8fcr"]
+animation = &"attack_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3piv4"]
+animation = &"dash_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_abvy7"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uj6to"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2koar"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hni15"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5i4n1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_88coi"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_teg3v"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7nt0g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hnkga"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2afgd"]
+states/attack_1/node = SubResource("AnimationNodeAnimation_o8fcr")
+states/attack_1/position = Vector2(466, -18)
+states/dash_attack/node = SubResource("AnimationNodeAnimation_3piv4")
+states/dash_attack/position = Vector2(352, 229)
+states/idle/node = SubResource("AnimationNodeAnimation_abvy7")
+states/idle/position = Vector2(352, 100)
+states/run/node = SubResource("AnimationNodeAnimation_uj6to")
+states/run/position = Vector2(466, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2koar"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hni15"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_5i4n1"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_88coi"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_teg3v"), "run", "dash_attack", SubResource("AnimationNodeStateMachineTransition_7nt0g"), "dash_attack", "run", SubResource("AnimationNodeStateMachineTransition_hnkga")]
+graph_offset = Vector2(-215, -135)
+
+[node name="Goblin" type="CharacterBody2D"]
+collision_layer = 6
+collision_mask = 4
+script = ExtResource("1_25ags")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -37)
+shape = SubResource("CapsuleShape2D_a0cop")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2(34, -37)
+shape = SubResource("RectangleShape2D_8707k")
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(0, -34.11)
+shape = SubResource("RectangleShape2D_1kvm2")
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_gxxad")
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "anim_tree")]
+script = ExtResource("2_bvxru")
+initial_state = NodePath("Idle")
+anim_tree = NodePath("../AnimationTree")
+
+[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("goblin")]
+script = ExtResource("3_ir51q")
+goblin = NodePath("../..")
+
+[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("goblin")]
+script = ExtResource("4_ggekw")
+goblin = NodePath("../..")
+
+[node name="Attack" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("goblin")]
+script = ExtResource("4_12gls")
+goblin = NodePath("../..")
+
+[node name="Timer" type="Timer" parent="FiniteStateMachine/Attack"]
+wait_time = 0.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+libraries = {
+"": SubResource("AnimationLibrary_5tcdk")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+libraries = {
+"": SubResource("AnimationLibrary_5tcdk")
+}
+tree_root = SubResource("AnimationNodeStateMachine_2afgd")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -48)
+sprite_frames = ExtResource("3_wjic7")
+animation = &"run"
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_entered" from="AttackRange" to="FiniteStateMachine/Idle" method="_on_attack_range_body_entered"]
+[connection signal="body_entered" from="AttackRange" to="FiniteStateMachine/Run" method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_player_detection_body_exited"]
+[connection signal="idle_speed" from="FiniteStateMachine/Idle" to="." method="_on_idle_idle_speed"]
+[connection signal="walk_speed" from="FiniteStateMachine/Run" to="." method="_on_run_walk_speed"]
+[connection signal="attack_direction" from="FiniteStateMachine/Attack" to="." method="_on_attack_attack_direction"]
+[connection signal="walk_speed" from="FiniteStateMachine/Attack" to="." method="_on_attack_walk_speed"]
+[connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Attack" method="_on_animation_tree_animation_finished"]

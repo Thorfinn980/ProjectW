@@ -15,6 +15,7 @@ signal Transitioned
 var playback : AnimationNodeStateMachinePlayback
 var next_state : State
 
+
 # Abstract func: upon entering, execute code within
 func enter():
 	pass

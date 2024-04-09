@@ -761,12 +761,12 @@ states/Move/position = Vector2(344, 100)
 states/Roll/node = SubResource("AnimationNodeAnimation_ompsa")
 states/Roll/position = Vector2(597, 100)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_hnawq"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_jitm5"), "Jump", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_o85fw"), "JumpEnd", "Move", SubResource("AnimationNodeStateMachineTransition_v5wli"), "Move", "Roll", SubResource("AnimationNodeStateMachineTransition_fyypl"), "Roll", "Move", SubResource("AnimationNodeStateMachineTransition_ugkos"), "Move", "Attack1", SubResource("AnimationNodeStateMachineTransition_pkm6x"), "Attack1", "Move", SubResource("AnimationNodeStateMachineTransition_0bfno"), "Attack1", "Attack2", SubResource("AnimationNodeStateMachineTransition_8dkfj"), "Attack2", "Move", SubResource("AnimationNodeStateMachineTransition_f6i1a"), "Attack2", "Attack3", SubResource("AnimationNodeStateMachineTransition_0rscs"), "Attack3", "Move", SubResource("AnimationNodeStateMachineTransition_avull")]
-graph_offset = Vector2(-188, 62)
+graph_offset = Vector2(-173, -193)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7dfm2"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j3l4o"]
-graph_offset = Vector2(-437, 91)
+graph_offset = Vector2(-530.3, 25.5)
 nodes/AnimationStateMachine/node = SubResource("AnimationNodeStateMachine_ge36a")
 nodes/AnimationStateMachine/position = Vector2(-260, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7dfm2")
@@ -774,7 +774,7 @@ nodes/TimeScale/position = Vector2(20, 100)
 node_connections = [&"TimeScale", 0, &"AnimationStateMachine", &"output", 0, &"TimeScale"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eg0fe"]
-size = Vector2(29, 30)
+size = Vector2(36, 43)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_pru7v")
@@ -828,19 +828,19 @@ player = NodePath("../..")
 script = ExtResource("8_pufau")
 player = NodePath("../..")
 
-[node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+[node name="Attack" type="Node" parent="State Machine"]
 script = ExtResource("10_6ne4l")
-player = NodePath("../..")
+can_move = null
 
 [node name="Timer" type="Timer" parent="State Machine/Attack"]
-wait_time = 0.3
+wait_time = 0.5
 
 [node name="Sword" type="Area2D" parent="."]
 monitoring = false
 script = ExtResource("10_r1sj5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
-position = Vector2(28, -15)
+position = Vector2(45, -21.5)
 shape = SubResource("RectangleShape2D_eg0fe")
 
 [node name="Damageable" type="Node" parent="."]

@@ -1,25 +1,30 @@
-extends State
-class_name EnemyIdle
-
+extends NPCState
+ 
 @onready var collision = $"../../PlayerDetection/CollisionShape2D"
-@export var enemy : CharacterBody2D
-
-func enter():
-	print("isIdle")
-
+@onready var progress_bar = owner.find_child("ProgressBar")
+var playback = null
+ 
+ 
 var player_entered: bool = false:
 	set(value):
 		player_entered = value
 		collision.set_deferred("disabled", value)
-		#animation_player.play("idle")
+ 
+func _ready():
+	playback = owner.get_node("AnimationTree").get("parameters/StateMachine/playback")
 
-func state_process (_delta: float):
-	if player_entered:
-		Transitioned.emit(self, "Follow")
-		
-
+func enter():
+	print("idle")
+	super.enter()
+	#animation_player.play("idle")
+	playback.travel("idle")
+ 
 func _on_player_detection_body_entered(body):
 	if body.name == "Player":
-		print("Player")
-		print(body.name)
 		player_entered = true
+ 
+func transition():
+	print("true")
+	if player_entered:
+		print("true")
+		get_parent().change_state("Follow")

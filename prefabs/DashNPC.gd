@@ -1,11 +1,10 @@
-extends State
+extends NPCState
  
-@onready var anim_tree : AnimationTree = $"../../AnimationTree"
 var can_transition: bool = false
  
 func enter():
 	super.enter()
-	animation_player.play("glowing")
+	#animation_player.play("glowing")
 	await dash()
 	can_transition = true
  
@@ -15,6 +14,7 @@ func dash():
 	await tween.finished
  
 func transition():
+	print("Dash")
 	if can_transition:
 		can_transition = false
  

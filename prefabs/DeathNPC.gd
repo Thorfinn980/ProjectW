@@ -1,10 +1,10 @@
-extends State
-class_name EnemyDeath
-
-@onready var anim_tree : AnimationTree = $"../../AnimationTree" 
-
+extends NPCState
+ 
 func enter():
-	#owner.anim_player.play("attack")
-	playback.travel("death")
-	#await animation_player.animation_finished
+	print("Death")
+	super.enter()
+	animation_player.play("death")
+ #
+#func boss_slained():
 	#animation_player.play("boss_slained")
+ #

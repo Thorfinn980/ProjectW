@@ -1,32 +1,37 @@
-extends State
-class_name EnemyFollow
-
-var direction : Vector2 = Vector2.ZERO
-#var player : CharacterBody2D
-
-func enter():
-	print("isFollowing")
-	#player = get_tree().get_first_node_in_group("Player")
-	owner.set_physics_process(true)
+extends NPCState
  
-func exit():
-	owner.set_physics_process(false)
-	
-func state_process (_delta: float):
-	# Guard check to ensure 'player' is not null and still part of the scene
-	#if player and player.is_inside_tree():
-		var distance = owner.direction.length()
-		print(distance)
-		if distance < 75:
-			owner.set_physics_process(false)
-			Transitioned.emit(self, "Attack")
-		elif distance > 130:
-			var chance = randi() % 2
-			#match chance:
-				#0:
-					#get_parent().change_state("HomingMissile")
-				#1:
-					#get_parent().change_state("LaserBeam")
-		
-		
+var playback = null
 
+func _enter_tree():
+	randomize()
+ 
+func enter():
+	print("Follow")
+	super.enter()
+	owner.set_physics_process(true)
+	#animation_player.play("idle")
+	#playback.travel("idle")
+	
+ 
+func _ready():
+	playback = owner.get_node("AnimationTree").get("parameters/StateMachine/playback")
+
+func exit():
+	super.exit()
+	owner.set_physics_process(false)
+ 
+func transition():
+	animation_player.play("run")
+	print("Run")
+	
+	if owner.direction.length() < 80:
+		get_parent().change_state("Attack")
+	#if owner.direction.length() > 150:
+		#var chance = randi() % 2
+		#match chance:
+			#0:
+				#print("test")
+				###get_parent().change_state("SpawnMinion")
+			#1:
+				#print("test2")
+				##get_parent().change_state("Teleport")
