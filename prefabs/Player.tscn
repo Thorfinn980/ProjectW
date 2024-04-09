@@ -848,4 +848,5 @@ script = ExtResource("12_2bnhd")
 
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_animation_tree_animation_finished"]
+[connection signal="player_roll" from="State Machine/Ground" to="." method="_on_ground_player_roll"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]

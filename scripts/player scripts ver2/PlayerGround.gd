@@ -6,6 +6,8 @@ class_name PlayerGround
 var delta_roll
 var IsRolling = false
 
+signal player_roll()
+
 func enter():
 	print("You are running")
 
@@ -30,7 +32,8 @@ func jump():
 	playback.travel("Jump")
 
 func roll(delta_roll):
-	player.velocity.x = player.roll_direction * player.ROLL_VELOCITY
+	emit_signal("player_roll", delta_roll)
+	#player.velocity.x = player.roll_direction * player.ROLL_VELOCITY
 	playback.travel("Roll")
 
 func attack():
