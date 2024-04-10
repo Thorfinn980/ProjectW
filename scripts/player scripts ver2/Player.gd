@@ -51,3 +51,10 @@ func update_direction():
 		sprite.flip_h = true
 		emit_signal("change_sword_direction", true)
 		
+
+
+func _on_ground_on_roll():
+	for n in 10:
+		velocity += Vector2(velocity.x * 1.8 , 0)
+		move_and_slide()
+		await get_tree().create_timer(0.03).timeout

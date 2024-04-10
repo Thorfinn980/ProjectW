@@ -7,6 +7,8 @@ var delta_roll
 var IsRolling = false
 var is_dead = false
 
+signal on_roll()
+
 func enter():
 	print("You are running")
 
@@ -34,6 +36,7 @@ func jump():
 	playback.travel("Jump")
 
 func roll(delta_roll):
+	emit_signal("on_roll")
 	playback.travel("Roll")
 
 func attack():
