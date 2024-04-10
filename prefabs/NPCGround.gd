@@ -5,7 +5,6 @@ class_name NPCIdle
 var player_entered = false
 var is_body_inside = false
 
-
 signal idle_speed(new_speed)
 
 func enter():
@@ -15,7 +14,15 @@ func enter():
 
 func state_process(_delta):
 	if is_body_inside:
-		Transitioned.emit(self, "Run")
+		Transitioned.emit(self, "Dash")
+		var chance = randi() % 200
+		print(chance)
+		match chance:
+			0:
+				Transitioned.emit(self, "Dash")
+			1:
+				Transitioned.emit(self, "Attack")
+	
 	#if player_entered == true && owner.direction.length() > 80:
 		#playback.travel("run")
 	#elif player_entered == true && owner.direction.length() > 100:

@@ -6,14 +6,14 @@ class_name NPCDash
 var player_entered = false
 
 func enter():
-	print("IsDash")
 	playback.travel("dash_attack")
-
-
+	dash()
 
 func dash():
 	var tween = create_tween()
 	tween.tween_property(owner, "position", player.position, 0.8)
-	await tween.finished
-	Transitioned.emit(self,"Idle")
 
+func _on_animation_tree_animation_finished(anim_name):
+	print(anim_name)
+	if anim_name == "dash_attack":
+		Transitioned.emit(self,"Run")

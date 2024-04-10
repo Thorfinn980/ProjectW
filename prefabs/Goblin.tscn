@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://be04pgmdk7jm0"]
+[gd_scene load_steps=42 format=3 uid="uid://be04pgmdk7jm0"]
 
 [ext_resource type="Script" path="res://Goblin.gd" id="1_25ags"]
 [ext_resource type="Script" path="res://scripts/state machines/FiniteStateMachineNPC.gd" id="2_bvxru"]
@@ -7,6 +7,7 @@
 [ext_resource type="Animation" uid="uid://b1c8ejnhb6sqd" path="res://graphics/animations/attack_1.res" id="4_0nmuw"]
 [ext_resource type="Script" path="res://prefabs/NPCAttack.gd" id="4_12gls"]
 [ext_resource type="Script" path="res://prefabs/NPCRun.gd" id="4_ggekw"]
+[ext_resource type="Script" path="res://prefabs/NPCDash.gd" id="4_p6t5y"]
 [ext_resource type="Animation" uid="uid://dmvll6omm7ya8" path="res://graphics/animations/attack_2.res" id="5_irxrb"]
 [ext_resource type="Animation" uid="uid://of3h8lm5fbom" path="res://graphics/animations/attack_3.res" id="6_0qccc"]
 [ext_resource type="Animation" uid="uid://bcbce8n4b5rkq" path="res://graphics/animations/charge_1.res" id="7_5fjq5"]
@@ -25,7 +26,7 @@ height = 74.0
 size = Vector2(88, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kvm2"]
-size = Vector2(191.25, 68.05)
+size = Vector2(163.313, 68.05)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxxad"]
 size = Vector2(665, 30)
@@ -167,6 +168,9 @@ anim_tree = NodePath("../AnimationTree")
 script = ExtResource("3_ir51q")
 goblin = NodePath("../..")
 
+[node name="Dash" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_p6t5y")
+
 [node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("goblin")]
 script = ExtResource("4_ggekw")
 goblin = NodePath("../..")
@@ -176,7 +180,7 @@ script = ExtResource("4_12gls")
 goblin = NodePath("../..")
 
 [node name="Timer" type="Timer" parent="FiniteStateMachine/Attack"]
-wait_time = 0.3
+wait_time = 0.2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationTree")
@@ -207,6 +211,7 @@ animation = &"run"
 [connection signal="idle_speed" from="FiniteStateMachine/Idle" to="." method="_on_idle_idle_speed"]
 [connection signal="walk_speed" from="FiniteStateMachine/Run" to="." method="_on_run_walk_speed"]
 [connection signal="attack_direction" from="FiniteStateMachine/Attack" to="." method="_on_attack_attack_direction"]
-[connection signal="impulse_attack" from="FiniteStateMachine/Attack" to="." method="_on_attack_impulse_attack"]
 [connection signal="walk_speed" from="FiniteStateMachine/Attack" to="." method="_on_attack_walk_speed"]
+[connection signal="timeout" from="FiniteStateMachine/Attack/Timer" to="FiniteStateMachine/Attack" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Attack" method="_on_animation_tree_animation_finished"]
+[connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Dash" method="_on_animation_tree_animation_finished"]
