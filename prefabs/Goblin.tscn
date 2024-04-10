@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://be04pgmdk7jm0"]
+[gd_scene load_steps=45 format=3 uid="uid://be04pgmdk7jm0"]
 
 [ext_resource type="Script" path="res://Goblin.gd" id="1_25ags"]
 [ext_resource type="Script" path="res://scripts/state machines/FiniteStateMachineNPC.gd" id="2_bvxru"]
@@ -13,14 +13,12 @@
 [ext_resource type="Animation" uid="uid://dmvll6omm7ya8" path="res://graphics/animations/attack_2.res" id="5_irxrb"]
 [ext_resource type="Animation" uid="uid://of3h8lm5fbom" path="res://graphics/animations/attack_3.res" id="6_0qccc"]
 [ext_resource type="Animation" uid="uid://bcbce8n4b5rkq" path="res://graphics/animations/charge_1.res" id="7_5fjq5"]
-[ext_resource type="Script" path="res://prefabs/NPCDeath.gd" id="8_hp1ii"]
 [ext_resource type="Animation" uid="uid://c2t5v2151wal5" path="res://graphics/animations/charge_2.res" id="8_plkiq"]
 [ext_resource type="Animation" uid="uid://y03r4bat7jtp" path="res://graphics/animations/dash_attack.res" id="9_tvwyj"]
 [ext_resource type="Animation" uid="uid://co32cdyphmnxd" path="res://graphics/animations/death.res" id="10_bjhpw"]
 [ext_resource type="Animation" uid="uid://btk5d8rutnvvq" path="res://graphics/animations/hurt.res" id="11_ayhue"]
 [ext_resource type="Animation" uid="uid://cxlsosx2jf3eb" path="res://graphics/animations/run.res" id="12_8gue0"]
 [ext_resource type="Animation" uid="uid://bqb4mfnr2w73p" path="res://graphics/animations/idle.res" id="13_emxni"]
-[ext_resource type="Script" path="res://scripts/utilities/Damageable.gd" id="20_c122o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0cop"]
 radius = 27.0
@@ -116,9 +114,6 @@ animation = &"attack_3"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3piv4"]
 animation = &"dash_attack"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s0x5h"]
-animation = &"death"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_abvy7"]
 animation = &"idle"
 
@@ -148,8 +143,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_upq3j"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h4o4d"]
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2afgd"]
 states/attack_1/node = SubResource("AnimationNodeAnimation_o8fcr")
 states/attack_1/position = Vector2(466, -18)
@@ -159,14 +152,12 @@ states/attack_3/node = SubResource("AnimationNodeAnimation_g4ac1")
 states/attack_3/position = Vector2(710, 100)
 states/dash_attack/node = SubResource("AnimationNodeAnimation_3piv4")
 states/dash_attack/position = Vector2(352, 229)
-states/death/node = SubResource("AnimationNodeAnimation_s0x5h")
-states/death/position = Vector2(509, 229)
 states/idle/node = SubResource("AnimationNodeAnimation_abvy7")
 states/idle/position = Vector2(352, 100)
 states/run/node = SubResource("AnimationNodeAnimation_uj6to")
 states/run/position = Vector2(466, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2koar"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hni15"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_5i4n1"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_88coi"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_teg3v"), "run", "dash_attack", SubResource("AnimationNodeStateMachineTransition_7nt0g"), "dash_attack", "run", SubResource("AnimationNodeStateMachineTransition_hnkga"), "run", "attack_2", SubResource("AnimationNodeStateMachineTransition_7fwsf"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_eqyqa"), "run", "attack_3", SubResource("AnimationNodeStateMachineTransition_6qov0"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_upq3j"), "run", "death", SubResource("AnimationNodeStateMachineTransition_h4o4d")]
-graph_offset = Vector2(21, 60)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2koar"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hni15"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_5i4n1"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_88coi"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_teg3v"), "run", "dash_attack", SubResource("AnimationNodeStateMachineTransition_7nt0g"), "dash_attack", "run", SubResource("AnimationNodeStateMachineTransition_hnkga"), "run", "attack_2", SubResource("AnimationNodeStateMachineTransition_7fwsf"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_eqyqa"), "run", "attack_3", SubResource("AnimationNodeStateMachineTransition_6qov0"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_upq3j")]
+graph_offset = Vector2(-61, -68)
 
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 6
@@ -226,9 +217,6 @@ script = ExtResource("4_p6t5y")
 script = ExtResource("4_ggekw")
 goblin = NodePath("../..")
 
-[node name="Death" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("8_hp1ii")
-
 [node name="Attack" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("goblin")]
 script = ExtResource("4_12gls")
 goblin = NodePath("../..")
@@ -256,9 +244,6 @@ position = Vector2(4, -48)
 sprite_frames = ExtResource("3_wjic7")
 animation = &"run"
 
-[node name="Damageable" type="Node" parent="."]
-script = ExtResource("20_c122o")
-
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_entered" from="AttackRange" to="FiniteStateMachine/Idle" method="_on_attack_range_body_entered"]
 [connection signal="body_entered" from="AttackRange" to="FiniteStateMachine/Run" method="_on_attack_range_body_entered"]
@@ -273,4 +258,3 @@ script = ExtResource("20_c122o")
 [connection signal="timeout" from="FiniteStateMachine/Attack/Timer" to="FiniteStateMachine/Attack" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Dash" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Attack" method="_on_animation_tree_animation_finished"]
-[connection signal="character_dead" from="Damageable" to="FiniteStateMachine/Run" method="_on_damageable_character_dead"]
