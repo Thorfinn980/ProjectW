@@ -46,6 +46,7 @@ func update_direction():
 	elif direction.x < 0:
 		sprite.flip_h = true
 		
+		
 func _on_ground_player_roll():
 		if Input.is_action_just_released("Roll"):
 			if direction.x > 0:
