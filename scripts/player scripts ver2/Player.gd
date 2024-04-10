@@ -21,7 +21,6 @@ func _physics_process(delta):
 	
 	direction = Input.get_vector("Left", "Right", "Down", "Up")
 	roll_direction = direction.x
-	
 	if direction.x != 0 && state_machine.check_if_can_move():
 		velocity.x = direction.x * SPEED
 	else:
@@ -39,12 +38,3 @@ func update_direction():
 		sprite.flip_h = false
 	elif direction.x < 0:
 		sprite.flip_h = true
-
-func _on_ground_player_roll(delta):
-	for n in 10:
-		velocity += Vector2(velocity.x * 1.8 , 0)
-		move_and_slide()
-		await get_tree().create_timer(0.03).timeout
-		
-	print(str(velocity))
-
