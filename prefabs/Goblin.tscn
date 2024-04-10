@@ -175,6 +175,8 @@ shape = SubResource("RectangleShape2D_8707k")
 position = Vector2(56.5, -34)
 monitoring = false
 script = ExtResource("2_s7v8c")
+goblin = NodePath("..")
+facing_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Axe"]
 position = Vector2(-13, 0)
