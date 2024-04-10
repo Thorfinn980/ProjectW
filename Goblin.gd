@@ -42,6 +42,7 @@ func update_facing_direction():
 		animated_sprite.flip_h = true
 	
 	emit_signal("facing_direction_changed", !animated_sprite.flip_h)
+	
 
 func _on_player_detection_body_entered(body):
 	if body.name == "Player":
