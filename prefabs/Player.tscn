@@ -845,6 +845,7 @@ shape = SubResource("RectangleShape2D_eg0fe")
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("12_2bnhd")
 
+[connection signal="change_sword_direction" from="." to="Sword" method="_on_player_change_sword_direction"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]
