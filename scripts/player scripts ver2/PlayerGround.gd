@@ -17,7 +17,6 @@ func state_physics_process (delta: float):
 
 func state_input(event : InputEvent):
 	if(event.is_action_pressed("Roll")):
-		#anim_tree.set("parameters/TimeScale/scale", 2.0)
 		roll(delta_roll)
 	if(event.is_action_pressed("Jump")):
 		jump()
@@ -30,7 +29,6 @@ func jump():
 	playback.travel("Jump")
 
 func roll(delta_roll):
-	player.velocity.x = player.roll_direction * player.ROLL_VELOCITY
 	playback.travel("Roll")
 
 func attack():

@@ -1,8 +1,9 @@
 extends CharacterBody2D
+class_name Player
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-const ROLL_VELOCITY = 5000.0
+const ROLL_VELOCITY = 100.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -26,6 +27,12 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
+	if Input.is_action_just_released("Roll"):
+			if direction.x > 0:
+				self.position.x += ROLL_VELOCITY
+			elif direction.x < 0:
+				self.position.x -= ROLL_VELOCITY
+	
 	move_and_slide()
 	update_animation()
 	update_direction()
@@ -38,3 +45,10 @@ func update_direction():
 		sprite.flip_h = false
 	elif direction.x < 0:
 		sprite.flip_h = true
+		
+func _on_ground_player_roll():
+		if Input.is_action_just_released("Roll"):
+			if direction.x > 0:
+				self.position.x += ROLL_VELOCITY
+			elif direction.x < 0:
+				self.position.x -= ROLL_VELOCITY

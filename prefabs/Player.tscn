@@ -836,7 +836,6 @@ can_move = null
 wait_time = 0.5
 
 [node name="Sword" type="Area2D" parent="."]
-monitoring = false
 script = ExtResource("10_r1sj5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]

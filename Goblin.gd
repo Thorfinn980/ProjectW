@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name GoblinBoss
  
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var player = get_parent().find_child("Player")
@@ -16,6 +17,8 @@ var player_in_range = false
 var attack : bool
 var speed = 20
 
+signal facing_direction_changed(facing_right : bool)
+
 func _ready():
 	anim_tree.active = true
  
@@ -23,17 +26,23 @@ func _process(_delta):
 	if reference_player:
 		direction = sign((reference_player.global_position - global_position))
 		
-	if direction.x < 0 and !attack:
-		animated_sprite.flip_h = true
-	elif direction.x > 0 and !attack:
-		animated_sprite.flip_h = false
- 
+	update_facing_direction()
+	
+	
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	velocity = direction.normalized() * speed
+	move_and_slide()
 
-	move_and_collide(velocity * delta)
+func update_facing_direction():
+	if direction.x > 0 and !attack:
+		animated_sprite.flip_h = false
+	elif direction.x < 0 and !attack:
+		animated_sprite.flip_h = true
+	
+	emit_signal("facing_direction_changed", !animated_sprite.flip_h)
+	
 
 func _on_player_detection_body_entered(body):
 	if body.name == "Player":

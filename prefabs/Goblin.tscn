@@ -1,7 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://be04pgmdk7jm0"]
+[gd_scene load_steps=45 format=3 uid="uid://be04pgmdk7jm0"]
 
 [ext_resource type="Script" path="res://Goblin.gd" id="1_25ags"]
 [ext_resource type="Script" path="res://scripts/state machines/FiniteStateMachineNPC.gd" id="2_bvxru"]
+[ext_resource type="Script" path="res://prefabs/FacingCollisionShape2D.gd" id="2_m4vwh"]
+[ext_resource type="Script" path="res://prefabs/Axe.gd" id="2_s7v8c"]
 [ext_resource type="Script" path="res://prefabs/NPCGround.gd" id="3_ir51q"]
 [ext_resource type="SpriteFrames" uid="uid://c31tteot4tt4r" path="res://prefabs/Goblin.tres" id="3_wjic7"]
 [ext_resource type="Animation" uid="uid://b1c8ejnhb6sqd" path="res://graphics/animations/attack_1.res" id="4_0nmuw"]
@@ -24,6 +26,9 @@ height = 74.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8707k"]
 size = Vector2(88, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ce5na"]
+size = Vector2(76.5, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kvm2"]
 size = Vector2(163.313, 68.05)
@@ -56,6 +61,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"run"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Axe/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Axe/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(56.5, -34)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5tcdk"]
@@ -128,7 +157,7 @@ states/idle/position = Vector2(352, 100)
 states/run/node = SubResource("AnimationNodeAnimation_uj6to")
 states/run/position = Vector2(466, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2koar"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_hni15"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_5i4n1"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_88coi"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_teg3v"), "run", "dash_attack", SubResource("AnimationNodeStateMachineTransition_7nt0g"), "dash_attack", "run", SubResource("AnimationNodeStateMachineTransition_hnkga"), "run", "attack_2", SubResource("AnimationNodeStateMachineTransition_7fwsf"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_eqyqa"), "run", "attack_3", SubResource("AnimationNodeStateMachineTransition_6qov0"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_upq3j")]
-graph_offset = Vector2(-58, 5)
+graph_offset = Vector2(-61, -68)
 
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 6
@@ -145,6 +174,19 @@ shape = SubResource("CapsuleShape2D_a0cop")
 visible = false
 position = Vector2(34, -37)
 shape = SubResource("RectangleShape2D_8707k")
+
+[node name="Axe" type="Area2D" parent="." node_paths=PackedStringArray("goblin", "facing_shape")]
+script = ExtResource("2_s7v8c")
+damage = null
+goblin = NodePath("..")
+facing_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Axe"]
+position = Vector2(56.5, -34)
+shape = SubResource("RectangleShape2D_ce5na")
+script = ExtResource("2_m4vwh")
+facing_left_position = Vector2(-56.5, 0)
+facing_right_position = Vector2(56.5, 0)
 
 [node name="AttackRange" type="Area2D" parent="."]
 
@@ -189,6 +231,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 root_node = NodePath(".")
 libraries = {
 "": SubResource("AnimationLibrary_5tcdk")
@@ -213,5 +256,5 @@ animation = &"run"
 [connection signal="attack_direction" from="FiniteStateMachine/Attack" to="." method="_on_attack_attack_direction"]
 [connection signal="walk_speed" from="FiniteStateMachine/Attack" to="." method="_on_attack_walk_speed"]
 [connection signal="timeout" from="FiniteStateMachine/Attack/Timer" to="FiniteStateMachine/Attack" method="_on_timer_timeout"]
-[connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Dash" method="_on_animation_tree_animation_finished"]
+[connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Attack" method="_on_animation_tree_animation_finished"]
