@@ -2,11 +2,14 @@ extends State
 class_name Damageable
 
 signal character_dead(IsDead)
+signal update_bar()
 
 @export var health : float = 50
 
 func hit(damage : int):
 	health -= damage
+	emit_signal("update_bar")
+	
 	if health <= 0:
 		Transitioned.emit(self, "Death")
 
