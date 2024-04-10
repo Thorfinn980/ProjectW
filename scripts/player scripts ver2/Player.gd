@@ -29,9 +29,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_released("Roll"):
 			if direction.x > 0:
-				self.position.x += ROLL_VELOCITY
+				self.velocity.x += ROLL_VELOCITY
 			elif direction.x < 0:
-				self.position.x -= ROLL_VELOCITY
+				self.velocity.x -= ROLL_VELOCITY
 	
 	move_and_slide()
 	update_animation()
@@ -46,10 +46,3 @@ func update_direction():
 	elif direction.x < 0:
 		sprite.flip_h = true
 		
-		
-func _on_ground_player_roll():
-		if Input.is_action_just_released("Roll"):
-			if direction.x > 0:
-				self.position.x += ROLL_VELOCITY
-			elif direction.x < 0:
-				self.position.x -= ROLL_VELOCITY
