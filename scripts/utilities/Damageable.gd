@@ -15,3 +15,4 @@ func _process(delta):
 	print(x + str(health))
 	if health <= 0:
 		emit_signal("character_dead", true)
+

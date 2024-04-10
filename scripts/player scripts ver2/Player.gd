@@ -45,4 +45,3 @@ func update_direction():
 		sprite.flip_h = false
 	elif direction.x < 0:
 		sprite.flip_h = true
-		

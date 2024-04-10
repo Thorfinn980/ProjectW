@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=113 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://dpce0xq43fh75" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Attack.png" id="2_6njtg"]
@@ -10,9 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://bqrfusfku3e48" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Run.png" id="7_813mt"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAir.gd" id="7_dv8so"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerGround.gd" id="8_pufau"]
+[ext_resource type="Texture2D" uid="uid://cdw1hjiwxvknd" path="res://graphics/FreeKnight/Colour1/NoOutline/120x80_PNGSheets/_Death.png" id="8_wum5k"]
 [ext_resource type="Script" path="res://scripts/player scripts ver2/PlayerAttack.gd" id="10_6ne4l"]
 [ext_resource type="Script" path="res://scripts/utilities/Sword.gd" id="10_r1sj5"]
 [ext_resource type="Script" path="res://scripts/utilities/Damageable.gd" id="12_2bnhd"]
+[ext_resource type="Script" path="res://prefabs/Death.gd" id="12_pgvr1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 7.0
@@ -198,6 +200,46 @@ region = Rect2(960, 0, 120, 80)
 atlas = ExtResource("7_813mt")
 region = Rect2(1080, 0, 120, 80)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg71x"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuisg"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(120, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8f81"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(240, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owi6k"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(360, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i18kf"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(480, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrcf2"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(600, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md1rf"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(720, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3b1f"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(840, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocjwm"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(960, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb027"]
+atlas = ExtResource("8_wum5k")
+region = Rect2(1080, 0, 120, 80)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_vxlqx"]
 animations = [{
 "frames": [{
@@ -359,6 +401,41 @@ animations = [{
 "loop": true,
 "name": &"Run",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg71x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuisg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8f81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owi6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i18kf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrcf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md1rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3b1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocjwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jb027")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
 }]
 
 [sub_resource type="Animation" id="Animation_aonlp"]
@@ -480,9 +557,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false, true, false]
 }
-
-[sub_resource type="Animation" id="Animation_fx0y2"]
-resource_name = "Death"
 
 [sub_resource type="Animation" id="Animation_u6b6q"]
 resource_name = "Fall"
@@ -668,19 +742,47 @@ tracks/1/keys = {
 "values": [1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 
+[sub_resource type="Animation" id="Animation_fx0y2"]
+resource_name = "death"
+length = 0.989
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8j5qj"]
 _data = {
 "Attack1": SubResource("Animation_aonlp"),
 "Attack2": SubResource("Animation_vjof7"),
 "Attack3": SubResource("Animation_o0vds"),
-"Death": SubResource("Animation_fx0y2"),
 "Fall": SubResource("Animation_u6b6q"),
 "Idle": SubResource("Animation_yr8if"),
 "Jump": SubResource("Animation_32237"),
 "JumpEnd": SubResource("Animation_ekll5"),
 "RESET": SubResource("Animation_5y26w"),
 "Roll": SubResource("Animation_qsqn4"),
-"Run": SubResource("Animation_8widk")
+"Run": SubResource("Animation_8widk"),
+"death": SubResource("Animation_fx0y2")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_31s04"]
@@ -719,6 +821,9 @@ blend_mode = 1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ompsa"]
 animation = &"Roll"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_did01"]
+animation = &"death"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hnawq"]
 advance_mode = 2
 
@@ -745,6 +850,8 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_avull"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_66y1y"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ge36a"]
 states/Attack1/node = SubResource("AnimationNodeAnimation_31s04")
 states/Attack1/position = Vector2(344, 224)
@@ -760,13 +867,15 @@ states/Move/node = SubResource("AnimationNodeBlendSpace1D_ymoh3")
 states/Move/position = Vector2(344, 100)
 states/Roll/node = SubResource("AnimationNodeAnimation_ompsa")
 states/Roll/position = Vector2(597, 100)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_hnawq"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_jitm5"), "Jump", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_o85fw"), "JumpEnd", "Move", SubResource("AnimationNodeStateMachineTransition_v5wli"), "Move", "Roll", SubResource("AnimationNodeStateMachineTransition_fyypl"), "Roll", "Move", SubResource("AnimationNodeStateMachineTransition_ugkos"), "Move", "Attack1", SubResource("AnimationNodeStateMachineTransition_pkm6x"), "Attack1", "Move", SubResource("AnimationNodeStateMachineTransition_0bfno"), "Attack1", "Attack2", SubResource("AnimationNodeStateMachineTransition_8dkfj"), "Attack2", "Move", SubResource("AnimationNodeStateMachineTransition_f6i1a"), "Attack2", "Attack3", SubResource("AnimationNodeStateMachineTransition_0rscs"), "Attack3", "Move", SubResource("AnimationNodeStateMachineTransition_avull")]
-graph_offset = Vector2(-173, -193)
+states/death/node = SubResource("AnimationNodeAnimation_did01")
+states/death/position = Vector2(139, 209)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_hnawq"), "Move", "Jump", SubResource("AnimationNodeStateMachineTransition_jitm5"), "Jump", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_o85fw"), "JumpEnd", "Move", SubResource("AnimationNodeStateMachineTransition_v5wli"), "Move", "Roll", SubResource("AnimationNodeStateMachineTransition_fyypl"), "Roll", "Move", SubResource("AnimationNodeStateMachineTransition_ugkos"), "Move", "Attack1", SubResource("AnimationNodeStateMachineTransition_pkm6x"), "Attack1", "Move", SubResource("AnimationNodeStateMachineTransition_0bfno"), "Attack1", "Attack2", SubResource("AnimationNodeStateMachineTransition_8dkfj"), "Attack2", "Move", SubResource("AnimationNodeStateMachineTransition_f6i1a"), "Attack2", "Attack3", SubResource("AnimationNodeStateMachineTransition_0rscs"), "Attack3", "Move", SubResource("AnimationNodeStateMachineTransition_avull"), "Move", "death", SubResource("AnimationNodeStateMachineTransition_66y1y")]
+graph_offset = Vector2(-191, 87)
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7dfm2"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j3l4o"]
-graph_offset = Vector2(-530.3, 25.5)
+graph_offset = Vector2(-541, 109)
 nodes/AnimationStateMachine/node = SubResource("AnimationNodeStateMachine_ge36a")
 nodes/AnimationStateMachine/position = Vector2(-260, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7dfm2")
@@ -828,6 +937,9 @@ player = NodePath("../..")
 script = ExtResource("8_pufau")
 player = NodePath("../..")
 
+[node name="Death" type="Node" parent="State Machine"]
+script = ExtResource("12_pgvr1")
+
 [node name="Attack" type="Node" parent="State Machine"]
 script = ExtResource("10_6ne4l")
 can_move = null
@@ -850,3 +962,4 @@ script = ExtResource("12_2bnhd")
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]
+[connection signal="character_dead" from="Damageable" to="State Machine/Ground" method="_on_damageable_character_dead"]

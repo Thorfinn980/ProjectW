@@ -25,7 +25,7 @@ func enter():
 
 func dash():
 	var tween = create_tween()
-	tween.tween_property(owner, "position", player.position, 0.5)
+	tween.tween_property(owner, "position", player.position, 0.2)
 
 func _on_animation_tree_animation_finished(anim_name):
 	if anim_name == "attack_1":

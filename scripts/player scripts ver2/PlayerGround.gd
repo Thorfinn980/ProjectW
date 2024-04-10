@@ -5,9 +5,14 @@ class_name PlayerGround
 @onready var anim_tree : AnimationTree = $"../../AnimationTree"
 var delta_roll
 var IsRolling = false
+var is_dead = false
 
 func enter():
 	print("You are running")
+
+func state_process (delta: float):
+	if is_dead:
+		Transitioned.emit(self,"Death")
 
 func state_physics_process (delta: float):
 	delta_roll = delta
@@ -38,3 +43,7 @@ func attack():
 func _on_animation_tree_animation_finished(anim_name):
 	if(anim_name == "Roll"):
 		playback.travel("Move")
+
+
+func _on_damageable_character_dead(IsDead):
+	is_dead = IsDead
