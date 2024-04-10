@@ -29,7 +29,6 @@ func jump():
 	playback.travel("Jump")
 
 func roll(delta_roll):
-	#player.velocity.x = player.roll_direction * player.ROLL_VELOCITY
 	playback.travel("Roll")
 
 func attack():

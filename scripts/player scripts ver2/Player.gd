@@ -29,9 +29,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_released("Roll"):
 			if direction.x > 0:
-				self.velocity.x += ROLL_VELOCITY
+				self.position.x += ROLL_VELOCITY
 			elif direction.x < 0:
-				self.velocity.x -= ROLL_VELOCITY
+				self.position.x -= ROLL_VELOCITY
 	
 	move_and_slide()
 	update_animation()
@@ -40,13 +40,16 @@ func _physics_process(delta):
 func update_animation():
 	anim_tree.set("parameters/AnimationStateMachine/Move/blend_position", direction.x)
 
-signal change_sword_direction(direction : bool)
-
 func update_direction():
 	if direction.x > 0:
 		sprite.flip_h = false
-		emit_signal("change_sword_direction", false)
 	elif direction.x < 0:
 		sprite.flip_h = true
-		emit_signal("change_sword_direction", true)
 		
+		
+func _on_ground_player_roll():
+		if Input.is_action_just_released("Roll"):
+			if direction.x > 0:
+				self.position.x += ROLL_VELOCITY
+			elif direction.x < 0:
+				self.position.x -= ROLL_VELOCITY
