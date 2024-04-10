@@ -13,6 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
 var roll_direction : float
 
+
 func _ready():
 	anim_tree.active = true
 
@@ -39,10 +40,14 @@ func _physics_process(delta):
 
 func update_animation():
 	anim_tree.set("parameters/AnimationStateMachine/Move/blend_position", direction.x)
+	
 
+signal change_sword_direction(direction : bool)
 func update_direction():
 	if direction.x > 0:
 		sprite.flip_h = false
+		emit_signal("change_sword_direction", false)
 	elif direction.x < 0:
 		sprite.flip_h = true
+		emit_signal("change_sword_direction", true)
 		
