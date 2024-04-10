@@ -186,7 +186,6 @@ shape = SubResource("RectangleShape2D_8707k")
 
 [node name="Axe" type="Area2D" parent="." node_paths=PackedStringArray("goblin", "facing_shape")]
 script = ExtResource("2_s7v8c")
-damage = null
 goblin = NodePath("..")
 facing_shape = NodePath("CollisionShape2D")
 

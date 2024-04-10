@@ -17,7 +17,9 @@ func _on_body_entered(body):
 func on_goblin_facing_direction_changed(facing_right : bool):
 	if(facing_right):
 		facing_shape.position = facing_shape.facing_right_position
+		scale.x = 1
 	else:
 		facing_shape.position = facing_shape.facing_left_position
+		scale.x = -1
 		
 	
