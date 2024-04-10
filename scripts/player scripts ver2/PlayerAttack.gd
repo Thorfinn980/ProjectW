@@ -9,6 +9,8 @@ class_name PlayerAttack
 @export var player : CharacterBody2D
 @onready var timer : Timer = $Timer
 
+
+
 func enter():
 	# This is a base case for when we press jump
 	print("You are attacking")

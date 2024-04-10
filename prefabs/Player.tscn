@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=117 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://dpce0xq43fh75" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Attack.png" id="2_6njtg"]
@@ -15,6 +15,10 @@
 [ext_resource type="Script" path="res://scripts/utilities/Sword.gd" id="10_r1sj5"]
 [ext_resource type="Script" path="res://scripts/utilities/Damageable.gd" id="12_2bnhd"]
 [ext_resource type="Script" path="res://prefabs/Death.gd" id="12_pgvr1"]
+[ext_resource type="AudioStream" uid="uid://craqfg2ordchj" path="res://sound/61_Hit_03.wav" id="16_yqbjj"]
+[ext_resource type="Script" path="res://prefabs/Hit audio.gd" id="17_m176q"]
+[ext_resource type="AudioStream" uid="uid://dpf6v8iquoiwx" path="res://sound/56_Attack_03.wav" id="17_q86l8"]
+[ext_resource type="Script" path="res://prefabs/Swing audio.gd" id="19_8exq8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 7.0
@@ -942,7 +946,6 @@ script = ExtResource("12_pgvr1")
 
 [node name="Attack" type="Node" parent="State Machine"]
 script = ExtResource("10_6ne4l")
-can_move = null
 
 [node name="Timer" type="Timer" parent="State Machine/Attack"]
 wait_time = 0.5
@@ -959,9 +962,19 @@ shape = SubResource("RectangleShape2D_eg0fe")
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("12_2bnhd")
 
+[node name="Hit audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_yqbjj")
+script = ExtResource("17_m176q")
+
+[node name="Swing audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_q86l8")
+script = ExtResource("19_8exq8")
+
 [connection signal="change_sword_direction" from="." to="Sword" method="_on_player_change_sword_direction"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_animation_tree_animation_finished"]
+[connection signal="attack_audio" from="State Machine/Ground" to="Swing audio" method="_on_attack_attack_audio"]
 [connection signal="on_roll" from="State Machine/Ground" to="." method="_on_ground_on_roll"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]
 [connection signal="character_dead" from="Damageable" to="State Machine/Ground" method="_on_damageable_character_dead"]
+[connection signal="hit_audio" from="Damageable" to="Hit audio" method="_on_damageable_hit_audio"]

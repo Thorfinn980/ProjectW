@@ -22,12 +22,15 @@ func state_physics_process (delta: float):
 	if(!player.is_on_floor()):
 		Transitioned.emit(self,"Air")
 
+signal attack_audio
+
 func state_input(event : InputEvent):
 	if(event.is_action_pressed("Roll")):
 		roll(delta_roll)
 	if(event.is_action_pressed("Jump")):
 		jump()
 	if(event.is_action_pressed("Attack")):
+		emit_signal("attack_audio")
 		attack()
 	
 func jump():

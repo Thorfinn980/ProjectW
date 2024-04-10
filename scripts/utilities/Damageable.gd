@@ -3,12 +3,14 @@ class_name Damageable
 
 signal character_dead(IsDead)
 signal update_bar()
+signal hit_audio()
 
 @export var health : float = 50
 
 func hit(damage : int):
 	health -= damage
 	emit_signal("update_bar")
+	emit_signal("hit_audio")
 	
 	if health <= 0:
 		Transitioned.emit(self, "Death")
