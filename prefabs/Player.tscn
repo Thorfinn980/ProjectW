@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=120 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://dpce0xq43fh75" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Attack.png" id="2_6njtg"]
@@ -19,6 +19,9 @@
 [ext_resource type="Script" path="res://prefabs/Hit audio.gd" id="17_m176q"]
 [ext_resource type="AudioStream" uid="uid://dpf6v8iquoiwx" path="res://sound/56_Attack_03.wav" id="17_q86l8"]
 [ext_resource type="Script" path="res://prefabs/Swing audio.gd" id="19_8exq8"]
+[ext_resource type="Texture2D" uid="uid://m3b1gss6wcro" path="res://graphics/Healthbar/over.png" id="20_bwtwy"]
+[ext_resource type="Texture2D" uid="uid://vd2umclfmv3d" path="res://graphics/Healthbar/progress.png" id="21_7x3qo"]
+[ext_resource type="Script" path="res://prefabs/TextureProgressBar.gd" id="22_yr6m8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 7.0
@@ -970,6 +973,18 @@ script = ExtResource("17_m176q")
 stream = ExtResource("17_q86l8")
 script = ExtResource("19_8exq8")
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -57.0
+offset_right = 584.0
+offset_bottom = -7.0
+scale = Vector2(0.08, 0.17)
+max_value = 5.0
+value = 5.0
+texture_over = ExtResource("20_bwtwy")
+texture_progress = ExtResource("21_7x3qo")
+script = ExtResource("22_yr6m8")
+
 [connection signal="change_sword_direction" from="." to="Sword" method="_on_player_change_sword_direction"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_animation_tree_animation_finished"]
@@ -978,3 +993,4 @@ script = ExtResource("19_8exq8")
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]
 [connection signal="character_dead" from="Damageable" to="State Machine/Ground" method="_on_damageable_character_dead"]
 [connection signal="hit_audio" from="Damageable" to="Hit audio" method="_on_damageable_hit_audio"]
+[connection signal="update_bar" from="Damageable" to="TextureProgressBar" method="_update"]
