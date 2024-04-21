@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2jvw51yavf5i"]
+[gd_scene load_steps=12 format=3 uid="uid://d2jvw51yavf5i"]
 
 [ext_resource type="Script" path="res://scripts/Home screen scripts/howToPlay.gd" id="1_5coeb"]
 [ext_resource type="Theme" uid="uid://du64vlif1cn8q" path="res://Theme/button.tres" id="1_nxx7n"]
@@ -8,6 +8,8 @@
 [ext_resource type="Shader" path="res://scripts/Home screen scripts/howToPlay.gdshader" id="5_kxcky"]
 [ext_resource type="PackedScene" uid="uid://cgqrdq8qnyn35" path="res://scenes/bg2.tscn" id="6_5xctr"]
 [ext_resource type="Theme" uid="uid://cijgtoj8ba1ic" path="res://Theme/description.tres" id="8_ymtnk"]
+[ext_resource type="AudioStream" uid="uid://cpxw4b2853wka" path="res://sound/menu/013_Confirm_03.wav" id="9_061br"]
+[ext_resource type="Script" path="res://scenes/AudioStreamPlayer2D.gd" id="10_stpdn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_78f0f"]
 shader = ExtResource("5_kxcky")
@@ -215,4 +217,9 @@ the boss by attacking it
 until it has no more health, 
 before you run out of health"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_061br")
+script = ExtResource("10_stpdn")
+
+[connection signal="button" from="." to="AudioStreamPlayer2D" method="_on_how_to_play_button"]
 [connection signal="pressed" from="Back" to="." method="_on_button_pressed"]

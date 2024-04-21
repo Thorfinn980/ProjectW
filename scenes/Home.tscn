@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0ai8mc8llfcu"]
+[gd_scene load_steps=7 format=3 uid="uid://d0ai8mc8llfcu"]
 
 [ext_resource type="Script" path="res://scripts/Home screen scripts/Home.gd" id="1_86gem"]
 [ext_resource type="Theme" uid="uid://du64vlif1cn8q" path="res://Theme/button.tres" id="1_jgl4x"]
 [ext_resource type="FontFile" uid="uid://c156o8gr4qu6r" path="res://Font/DungeonFont.ttf" id="3_dhfri"]
 [ext_resource type="PackedScene" uid="uid://1tpueqgtc4gh" path="res://scenes/bg.tscn" id="3_lmfcw"]
+[ext_resource type="AudioStream" uid="uid://cpxw4b2853wka" path="res://sound/menu/013_Confirm_03.wav" id="5_suppp"]
+[ext_resource type="Script" path="res://scenes/Button Sound.gd" id="6_22bbm"]
 
 [node name="Home" type="Node2D"]
 script = ExtResource("1_86gem")
@@ -40,6 +42,11 @@ text = "Quit"
 
 [node name="BG" parent="." instance=ExtResource("3_lmfcw")]
 
+[node name="Button Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_suppp")
+script = ExtResource("6_22bbm")
+
+[connection signal="button_click" from="." to="Button Sound" method="_on_home_button_click"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="How To" to="." method="_on_how_to_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

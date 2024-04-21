@@ -13,6 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
 var roll_direction : float
 
+signal block_active
 
 func _ready():
 	anim_tree.active = true

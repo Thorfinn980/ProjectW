@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=121 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://dpce0xq43fh75" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Attack.png" id="2_6njtg"]
@@ -23,8 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://m3b1gss6wcro" path="res://graphics/Healthbar/over.png" id="20_bwtwy"]
 [ext_resource type="Texture2D" uid="uid://vd2umclfmv3d" path="res://graphics/Healthbar/progress.png" id="21_7x3qo"]
 [ext_resource type="Script" path="res://prefabs/TextureProgressBar.gd" id="22_yr6m8"]
-[ext_resource type="Theme" uid="uid://cijgtoj8ba1ic" path="res://Theme/description.tres" id="24_aecm4"]
-[ext_resource type="Script" path="res://prefabs/Blocking.gd" id="25_rawrt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 7.0
@@ -286,11 +284,6 @@ animations = [{
 "loop": true,
 "name": &"Basic_Attack",
 "speed": 12.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"Block",
-"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -909,7 +902,8 @@ shape = SubResource("CapsuleShape2D_vvj3k")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(4, -40)
 sprite_frames = SubResource("SpriteFrames_vxlqx")
-animation = &"Block"
+animation = &"Basic_Attack"
+frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.6, 1.6)
@@ -973,6 +967,8 @@ shape = SubResource("RectangleShape2D_eg0fe")
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("12_2bnhd")
+health = null
+can_move = null
 
 [node name="Hit audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_yqbjj")
@@ -994,23 +990,11 @@ texture_over = ExtResource("20_bwtwy")
 texture_progress = ExtResource("21_7x3qo")
 script = ExtResource("22_yr6m8")
 
-[node name="Blocking" type="RichTextLabel" parent="."]
-visible = false
-offset_left = -31.0
-offset_top = 5.0
-offset_right = 40.0
-offset_bottom = 53.0
-theme = ExtResource("24_aecm4")
-text = "Blocking"
-script = ExtResource("25_rawrt")
-
 [connection signal="change_sword_direction" from="." to="Sword" method="_on_player_change_sword_direction"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="attack_audio" from="State Machine/Ground" to="Swing audio" method="_on_attack_attack_audio"]
 [connection signal="on_roll" from="State Machine/Ground" to="." method="_on_ground_on_roll"]
-[connection signal="block_active" from="State Machine/Block" to="Damageable" method="_on_block_block_active"]
-[connection signal="block_active" from="State Machine/Block" to="Blocking" method="_on_block_block_active"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]
 [connection signal="character_dead" from="Damageable" to="State Machine/Ground" method="_on_damageable_character_dead"]
 [connection signal="hit_audio" from="Damageable" to="Hit audio" method="_on_damageable_hit_audio"]

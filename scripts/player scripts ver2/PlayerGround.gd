@@ -32,6 +32,8 @@ func state_input(event : InputEvent):
 	if(event.is_action_pressed("Attack")):
 		emit_signal("attack_audio")
 		attack()
+	if(event.is_action_pressed("Block")):
+		block()
 	
 func jump():
 	player.velocity.y = player.JUMP_VELOCITY
@@ -45,6 +47,10 @@ func roll(delta_roll):
 func attack():
 	Transitioned.emit(self, "Attack")
 	playback.travel("Attack1")
+
+func block():
+	Transitioned.emit(self, "Block")
+	print("block")
 
 func _on_animation_tree_animation_finished(anim_name):
 	if(anim_name == "Roll"):

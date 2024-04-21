@@ -248,10 +248,23 @@ script = ExtResource("20_c122o")
 [node name="Boss healthbar" type="CanvasLayer" parent="."]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Boss healthbar"]
+visible = false
 offset_left = 264.0
 offset_top = 40.0
 offset_right = 872.0
 offset_bottom = 90.0
+max_value = 5.0
+value = 5.0
+texture_over = ExtResource("21_1320x")
+texture_progress = ExtResource("22_bjxn1")
+script = ExtResource("23_lb5k6")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -25.0
+offset_top = -90.0
+offset_right = 583.0
+offset_bottom = -40.0
+scale = Vector2(0.08, 0.17)
 max_value = 5.0
 value = 5.0
 texture_over = ExtResource("21_1320x")
@@ -274,4 +287,4 @@ script = ExtResource("23_lb5k6")
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Dash" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="character_dead" from="Damageable" to="FiniteStateMachine/Run" method="_on_damageable_character_dead"]
-[connection signal="update_bar" from="Damageable" to="Boss healthbar/TextureProgressBar" method="_update"]
+[connection signal="update_bar" from="Damageable" to="TextureProgressBar" method="_update"]
