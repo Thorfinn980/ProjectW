@@ -29,9 +29,9 @@ text = "Back"
 
 [node name="A" type="Button" parent="."]
 offset_left = 176.0
-offset_top = 70.0
+offset_top = 61.0
 offset_right = 314.0
-offset_bottom = 143.0
+offset_bottom = 134.0
 tooltip_text = "Move Left"
 theme = ExtResource("3_al8lj")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -41,9 +41,9 @@ text = "A"
 
 [node name="D" type="Button" parent="."]
 offset_left = 176.0
-offset_top = 170.0
+offset_top = 161.0
 offset_right = 314.0
-offset_bottom = 243.0
+offset_bottom = 234.0
 tooltip_text = "Move Right"
 theme = ExtResource("3_al8lj")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -53,9 +53,9 @@ text = "D"
 
 [node name="Space" type="Button" parent="."]
 offset_left = 176.0
-offset_top = 270.0
+offset_top = 259.0
 offset_right = 314.0
-offset_bottom = 343.0
+offset_bottom = 332.0
 tooltip_text = "Jump"
 theme = ExtResource("3_al8lj")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -65,9 +65,9 @@ text = "Space"
 
 [node name="Shift" type="Button" parent="."]
 offset_left = 179.0
-offset_top = 370.0
+offset_top = 358.0
 offset_right = 317.0
-offset_bottom = 443.0
+offset_bottom = 431.0
 tooltip_text = "Roll"
 theme = ExtResource("3_al8lj")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -77,9 +77,9 @@ text = "Shift"
 
 [node name="Left Click" type="Button" parent="."]
 offset_left = 179.0
-offset_top = 470.0
+offset_top = 453.0
 offset_right = 317.0
-offset_bottom = 543.0
+offset_bottom = 526.0
 tooltip_text = "Attack"
 theme = ExtResource("3_al8lj")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -87,51 +87,72 @@ theme_override_fonts/font = ExtResource("3_0wsnq")
 theme_override_font_sizes/font_size = 30
 text = "Left Click"
 
+[node name="Right Click" type="Button" parent="."]
+offset_left = 179.0
+offset_top = 546.0
+offset_right = 317.0
+offset_bottom = 619.0
+tooltip_text = "Attack"
+theme = ExtResource("3_al8lj")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_0wsnq")
+theme_override_font_sizes/font_size = 25
+text = "Right Click
+(Hold)"
+
 [node name="Panel" type="Panel" parent="."]
 offset_left = 341.0
-offset_top = 133.0
+offset_top = 107.0
 offset_right = 381.0
-offset_bottom = 173.0
+offset_bottom = 147.0
 scale = Vector2(3.8374, 0.543154)
 theme = ExtResource("4_obyvo")
 
 [node name="Panel2" type="Panel" parent="."]
 offset_left = 342.0
-offset_top = 233.0
+offset_top = 210.0
 offset_right = 382.0
-offset_bottom = 273.0
+offset_bottom = 250.0
 scale = Vector2(3.8374, 0.543154)
 theme = ExtResource("4_obyvo")
 
 [node name="Panel3" type="Panel" parent="."]
 offset_left = 341.0
-offset_top = 333.0
+offset_top = 313.0
 offset_right = 381.0
-offset_bottom = 373.0
+offset_bottom = 353.0
 scale = Vector2(3.8374, 0.543154)
 theme = ExtResource("4_obyvo")
 
 [node name="Panel4" type="Panel" parent="."]
 offset_left = 341.0
-offset_top = 433.0
+offset_top = 410.0
 offset_right = 381.0
-offset_bottom = 473.0
+offset_bottom = 450.0
 scale = Vector2(3.8374, 0.543154)
 theme = ExtResource("4_obyvo")
 
 [node name="Panel5" type="Panel" parent="."]
 offset_left = 341.0
-offset_top = 533.0
+offset_top = 510.0
 offset_right = 381.0
-offset_bottom = 573.0
+offset_bottom = 550.0
+scale = Vector2(3.8374, 0.543154)
+theme = ExtResource("4_obyvo")
+
+[node name="Panel6" type="Panel" parent="."]
+offset_left = 341.0
+offset_top = 600.0
+offset_right = 381.0
+offset_bottom = 640.0
 scale = Vector2(3.8374, 0.543154)
 theme = ExtResource("4_obyvo")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 offset_left = 354.0
-offset_top = 99.0
+offset_top = 75.0
 offset_right = 481.0
-offset_bottom = 139.0
+offset_bottom = 115.0
 
 [node name="Move Left" type="Label" parent="CenterContainer"]
 material = SubResource("ShaderMaterial_78f0f")
@@ -142,9 +163,9 @@ text = "Move Left"
 
 [node name="CenterContainer2" type="CenterContainer" parent="."]
 offset_left = 346.0
-offset_top = 199.0
+offset_top = 175.0
 offset_right = 487.0
-offset_bottom = 239.0
+offset_bottom = 215.0
 
 [node name="MoveRight" type="Label" parent="CenterContainer2"]
 material = SubResource("ShaderMaterial_78f0f")
@@ -155,9 +176,9 @@ text = "Move Right"
 
 [node name="CenterContainer3" type="CenterContainer" parent="."]
 offset_left = 373.0
-offset_top = 300.0
+offset_top = 275.0
 offset_right = 460.0
-offset_bottom = 340.0
+offset_bottom = 315.0
 
 [node name="Jump" type="Label" parent="CenterContainer3"]
 material = SubResource("ShaderMaterial_78f0f")
@@ -168,9 +189,9 @@ text = "Jump"
 
 [node name="CenterContainer4" type="CenterContainer" parent="."]
 offset_left = 373.0
-offset_top = 400.0
+offset_top = 375.0
 offset_right = 460.0
-offset_bottom = 440.0
+offset_bottom = 415.0
 
 [node name="Roll" type="Label" parent="CenterContainer4"]
 material = SubResource("ShaderMaterial_78f0f")
@@ -181,9 +202,9 @@ text = "Roll"
 
 [node name="CenterContainer5" type="CenterContainer" parent="."]
 offset_left = 373.0
-offset_top = 500.0
+offset_top = 475.0
 offset_right = 460.0
-offset_bottom = 540.0
+offset_bottom = 515.0
 
 [node name="Attack" type="Label" parent="CenterContainer5"]
 material = SubResource("ShaderMaterial_78f0f")
@@ -191,6 +212,19 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_0wsnq")
 theme_override_font_sizes/font_size = 30
 text = "Attack"
+
+[node name="CenterContainer6" type="CenterContainer" parent="."]
+offset_left = 373.0
+offset_top = 565.0
+offset_right = 460.0
+offset_bottom = 605.0
+
+[node name="Block" type="Label" parent="CenterContainer6"]
+material = SubResource("ShaderMaterial_78f0f")
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0wsnq")
+theme_override_font_sizes/font_size = 30
+text = "Block"
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("6_5xctr")]
 
@@ -204,9 +238,9 @@ theme = ExtResource("8_ymtnk")
 [node name="CenterContainer6" type="CenterContainer" parent="Description"]
 layout_mode = 0
 offset_left = 53.0
-offset_top = 43.0
+offset_top = 109.0
 offset_right = 359.0
-offset_bottom = 233.0
+offset_bottom = 299.0
 
 [node name="Label" type="Label" parent="Description/CenterContainer6"]
 layout_mode = 2
@@ -215,7 +249,9 @@ theme_override_font_sizes/font_size = 27
 text = "Your goal is to defeat 
 the boss by attacking it 
 until it has no more health, 
-before you run out of health"
+before you run out of health. 
+Block damage by holding
+right click."
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_061br")
