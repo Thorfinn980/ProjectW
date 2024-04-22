@@ -1,4 +1,7 @@
 extends RichTextLabel
 
-func _on_block_block_active():
-	visible = true
+
+func _on_damageable_block_nodamage():
+	show()
+	await get_tree().create_timer(1).timeout
+	hide()

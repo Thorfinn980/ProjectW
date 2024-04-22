@@ -5,6 +5,7 @@ signal character_dead(IsDead)
 signal update_bar()
 signal hit_audio()
 signal block_nodamage()
+signal player_dam()
 
 var is_blocking = false
 
@@ -37,6 +38,7 @@ func hit(damage : int):
 	else:
 		health -= damage
 		print("player hit")
+		emit_signal("player_dam")
 		emit_signal("update_bar")
 		emit_signal("hit_audio")
 		

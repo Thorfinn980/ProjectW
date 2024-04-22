@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://be04pgmdk7jm0"]
+[gd_scene load_steps=52 format=3 uid="uid://be04pgmdk7jm0"]
 
 [ext_resource type="Script" path="res://Goblin.gd" id="1_25ags"]
 [ext_resource type="Script" path="res://scripts/state machines/FiniteStateMachineNPC.gd" id="2_bvxru"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://m3b1gss6wcro" path="res://graphics/Healthbar/over.png" id="21_1320x"]
 [ext_resource type="Texture2D" uid="uid://vd2umclfmv3d" path="res://graphics/Healthbar/progress.png" id="22_bjxn1"]
 [ext_resource type="Script" path="res://prefabs/TextureProgressBar.gd" id="23_lb5k6"]
+[ext_resource type="Script" path="res://prefabs/Damage.gd" id="24_o6dc5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0cop"]
 radius = 27.0
@@ -271,6 +272,15 @@ texture_over = ExtResource("21_1320x")
 texture_progress = ExtResource("22_bjxn1")
 script = ExtResource("23_lb5k6")
 
+[node name="Damage" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -18.0
+offset_top = -113.0
+offset_right = 15.0
+offset_bottom = -83.0
+text = "- 10"
+script = ExtResource("24_o6dc5")
+
 [connection signal="body_entered" from="Axe" to="Axe" method="_on_body_entered"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_entered" from="AttackRange" to="FiniteStateMachine/Idle" method="_on_attack_range_body_entered"]
@@ -287,4 +297,5 @@ script = ExtResource("23_lb5k6")
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Dash" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="FiniteStateMachine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="character_dead" from="Damageable" to="FiniteStateMachine/Run" method="_on_damageable_character_dead"]
+[connection signal="player_dam" from="Damageable" to="Damage" method="_on_damageable_player_dam"]
 [connection signal="update_bar" from="Damageable" to="TextureProgressBar" method="_update"]
