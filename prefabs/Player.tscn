@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=130 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://dpce0xq43fh75" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Attack.png" id="2_6njtg"]
@@ -26,6 +26,9 @@
 [ext_resource type="Script" path="res://prefabs/TextureProgressBar.gd" id="22_yr6m8"]
 [ext_resource type="Theme" uid="uid://cijgtoj8ba1ic" path="res://Theme/description.tres" id="24_aecm4"]
 [ext_resource type="Script" path="res://prefabs/Blocking.gd" id="25_rawrt"]
+[ext_resource type="Script" path="res://prefabs/Damage.gd" id="27_gfqgj"]
+[ext_resource type="AudioStream" uid="uid://d3g1ywptwa72e" path="res://sound/fight/39_Block_03.wav" id="28_vpolm"]
+[ext_resource type="Script" path="res://prefabs/Block Audio.gd" id="29_djwna"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvj3k"]
 radius = 7.0
@@ -299,6 +302,7 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ppkcr")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1lq5e")
 }, {
@@ -1073,8 +1077,21 @@ offset_top = 5.0
 offset_right = 40.0
 offset_bottom = 53.0
 theme = ExtResource("24_aecm4")
-text = "Blocking"
+text = "Blocked!"
 script = ExtResource("25_rawrt")
+
+[node name="Damage" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -18.0
+offset_top = -79.0
+offset_right = 15.0
+offset_bottom = -49.0
+text = "- 10"
+script = ExtResource("27_gfqgj")
+
+[node name="Block Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_vpolm")
+script = ExtResource("29_djwna")
 
 [connection signal="change_sword_direction" from="." to="Sword" method="_on_player_change_sword_direction"]
 [connection signal="animation_finished" from="AnimationTree" to="State Machine/Ground" method="_on_animation_tree_animation_finished"]
@@ -1083,7 +1100,11 @@ script = ExtResource("25_rawrt")
 [connection signal="on_roll" from="State Machine/Ground" to="." method="_on_ground_on_roll"]
 [connection signal="block_active" from="State Machine/Block" to="Damageable" method="_on_block_block_active"]
 [connection signal="block_active" from="State Machine/Block" to="Blocking" method="_on_block_block_active"]
+[connection signal="block_active" from="State Machine/Block" to="Block Audio" method="_on_block_block_active"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]
+[connection signal="block_nodamage" from="Damageable" to="Blocking" method="_on_damageable_block_nodamage"]
+[connection signal="block_nodamage" from="Damageable" to="Block Audio" method="_on_damageable_block_nodamage"]
 [connection signal="character_dead" from="Damageable" to="State Machine/Ground" method="_on_damageable_character_dead"]
 [connection signal="hit_audio" from="Damageable" to="Hit audio" method="_on_damageable_hit_audio"]
+[connection signal="player_dam" from="Damageable" to="Damage" method="_on_damageable_player_dam"]
 [connection signal="update_bar" from="Damageable" to="TextureProgressBar" method="_update"]
