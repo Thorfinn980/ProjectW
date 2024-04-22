@@ -1,8 +1,9 @@
-[gd_scene load_steps=123 format=3 uid="uid://bo1aalxmfx57p"]
+[gd_scene load_steps=127 format=3 uid="uid://bo1aalxmfx57p"]
 
 [ext_resource type="Script" path="res://scripts/player scripts ver2/Player.gd" id="1_pru7v"]
 [ext_resource type="Texture2D" uid="uid://dpce0xq43fh75" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Attack.png" id="2_6njtg"]
 [ext_resource type="Texture2D" uid="uid://m7tcxvkher5" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Attack2.png" id="3_hovil"]
+[ext_resource type="Texture2D" uid="uid://c70p0utt0bqk1" path="res://graphics/FreeKnight/block.png" id="4_32s7b"]
 [ext_resource type="Texture2D" uid="uid://dtrd11arq65v5" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="4_fs6ld"]
 [ext_resource type="Texture2D" uid="uid://s5wlmu1x5vp6" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Jump.png" id="5_bw146"]
 [ext_resource type="Texture2D" uid="uid://p3e77e02h86n" path="res://graphics/FreeKnight/Colour1/Outline/120x80_PNGSheets/_Roll.png" id="6_minpc"]
@@ -69,6 +70,14 @@ region = Rect2(480, 0, 120, 80)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5qy0i"]
 atlas = ExtResource("3_hovil")
 region = Rect2(600, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppkcr"]
+atlas = ExtResource("4_32s7b")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lq5e"]
+atlas = ExtResource("4_32s7b")
+region = Rect2(240, 0, 120, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gr7ys"]
 atlas = ExtResource("4_fs6ld")
@@ -287,10 +296,30 @@ animations = [{
 "name": &"Basic_Attack",
 "speed": 12.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppkcr")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lq5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lq5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lq5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lq5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lq5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppkcr")
+}],
 "loop": true,
 "name": &"Block",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -699,6 +728,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [1]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Block"]
+}
 
 [sub_resource type="Animation" id="Animation_qsqn4"]
 resource_name = "Roll"
@@ -785,11 +826,41 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 
+[sub_resource type="Animation" id="Animation_ejyxc"]
+resource_name = "Block"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Block"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 1, 1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8j5qj"]
 _data = {
 "Attack1": SubResource("Animation_aonlp"),
 "Attack2": SubResource("Animation_vjof7"),
 "Attack3": SubResource("Animation_o0vds"),
+"Block": SubResource("Animation_ejyxc"),
 "Fall": SubResource("Animation_u6b6q"),
 "Idle": SubResource("Animation_yr8if"),
 "Jump": SubResource("Animation_32237"),
@@ -890,6 +961,7 @@ graph_offset = Vector2(-191, 87)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7dfm2"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j3l4o"]
+graph_offset = Vector2(314.876, -36.4026)
 nodes/AnimationStateMachine/node = SubResource("AnimationNodeStateMachine_ge36a")
 nodes/AnimationStateMachine/position = Vector2(-260, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7dfm2")
